@@ -1,0 +1,155 @@
+{
+  "brand": { "name": "OSSEOS BIO" },
+  "nav": { "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "channels": "Channels" },
+  "channels": {
+    "title": "Signal Channels",
+    "body": "Research notes, live dialogue and field updates from the Osseos Bio operator.",
+    "medium": { "tag": "Writing", "cta": "Read articles" },
+    "superme": { "tag": "AI Profile", "cta": "Ask the node" },
+    "x": { "tag": "Updates", "cta": "Follow" }
+  },
+  "cta": {
+    "enterShort": "Enter Mesh",
+    "enter": "Enter Braid Mesh Engine",
+    "terminal": "Open gateway terminal"
+  },
+  "hero": {
+    "eyebrow": "Topological Biophysics & Metabolic Lattice Domain",
+    "title": "Biology as a continuous, self-regulating field.",
+    "subtitle": "Osseos Bio models the organism as a contact manifold under mechanical, metabolic and energy-flux load — then hands execution to the Braid Mesh engine."
+  },
+  "tele": {
+    "sys": "SYS_ID",
+    "freq": "FREQ_LOCK",
+    "freqValue": "39,420 Hz Harmonic",
+    "manifold": "MANIFOLD",
+    "manifoldValue": "S^(d-1) Continuous Field",
+    "status": "STATUS",
+    "online": "ONLINE"
+  },
+  "mission": {
+    "title": "The Mission",
+    "lead": "Engineering biological longevity as a continuous, self-regulating field via Helfrich free energy models and mitochondrial flux dynamics.",
+    "body": "Conventional analytics read biology through isolated scalar metrics. Osseos Bio tracks structural integrity, autophagy cycles and mitochondrial density as coupled geometry — so drift is visible before degradation shows up."
+  },
+  "engines": {
+    "title": "Computational Edges",
+    "m1": {
+      "tag": "Module 01 · ODE",
+      "title": "Bio-Lattice & Metabolic Resonant Engine",
+      "formula": "dΨm/dt · J_ATP · mTOR ⇄ Autophagy",
+      "body": "Coupled differential equations for proton-motive force, ATP flux and the bistable switch between growth and cellular cleanup — simulated over continuous 48-hour trajectories."
+    },
+    "m2": {
+      "tag": "Module 02 · SDF",
+      "title": "Topological Biophysics & Membrane Mechanics",
+      "formula": "E = ∮ ½κ(2H − c₀)² + κ̄K dA",
+      "body": "A discretized Helfrich Hamiltonian for bilayer deformation, rendered live as GLSL signed-distance gyroid membranes — the field behind this page."
+    },
+    "m3": {
+      "tag": "Module 03 · Vector",
+      "title": "Spherical Biomarker Vector Engine",
+      "formula": "d_G(v̂₁, v̂₂) = arccos(v̂₁ · v̂₂)",
+      "body": "Normalized multi-omic vectors on the unit hypersphere S^(d-1), clustered by geodesic arc length instead of linear correlation."
+    }
+  },
+  "offerings": {
+    "title": "Products & Services",
+    "o1": { "title": "Osseos Core Engine", "body": "Python simulation suite mapping 48-hour fasting, workout and recovery protocols.", "deliv": "bio_lattice.py + phase-space analytics" },
+    "o2": { "title": "Topological Shader Viewport", "body": "WebGL 2 ray-marched SDF shader showing live lipid membrane stress deformation.", "deliv": "GPU viewport + Helfrich curvature stream" },
+    "o3": { "title": "Cybernetic Health Node", "body": "Local, privacy-first terminal running retrieval over literature and personal telemetry.", "deliv": "Qdrant / FAISS over PubMed, bioRxiv" },
+    "o4": { "title": "Systemic Entropy Audit", "body": "Continuous-field audit of biological signal-to-noise and cellular energy capacity.", "deliv": "Stability Index · Autophagy score · Ψm peak" }
+  },
+  "terminal": {
+    "title": "Gateway Terminal",
+    "hint": "Type a command or tap one below. Try status, search, simulate, or connect.",
+    "windowTitle": "osseos — gateway session",
+    "clear": "Clear",
+    "placeholder": "type a command, e.g. help",
+    "inputLabel": "Terminal command",
+    "run": "Run"
+  },
+  "mesh": {
+    "title": "Mesh Engine Access",
+    "body": "All real-time GLSL ray marching, vector searches and CLI execution run on the Braid Mesh core. Dispatch with Osseos Bio parameters pre-loaded.",
+    "render": "Shader viewport",
+    "terminal": "Full CLI session",
+    "biophysics": "Metabolic lattice",
+    "target": "Target:"
+  },
+  "footer": {
+    "stack": "Python · SciPy RK45 · WebGL 2 · GLSL SDF · S^(d-1) embeddings · Local-first"
+  },
+  "toast": {
+    "open": "Open link",
+    "dispatched": "Dispatched to Braid Mesh in a new tab.",
+    "blocked": "Pop-up blocked — tap to continue."
+  },
+  "term": {
+    "welcome1": "OSSEOS BIO // TOPOLOGICAL BIOPHYSICS NODE",
+    "welcome2": "SYS_ID: OSSEOS-CORE-v1.08 · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
+    "welcome3": "Type help to list commands.",
+    "unknown": "Unknown command: {cmd}. Type help to see available commands.",
+    "help": {
+      "title": "[AVAILABLE COMMANDS]",
+      "status": "status --node active            Live systemic telemetry",
+      "search": "search --manifold \"query\"       Vector search over longevity literature",
+      "simulate": "simulate --fasting A-B --workout X,Y [--export-glsl]   48h ODE protocol",
+      "connect": "connect --engine braidmesh      Hand off session to Braid Mesh",
+      "links": "links                           List social and research channels",
+      "open": "open medium | superme | x       Open a channel in a new tab",
+      "clear": "clear                           Clear the terminal",
+      "history": "Use ↑ / ↓ to recall previous commands."
+    },
+    "status": {
+      "title": "[SYSTEM TELEMETRY STATUS]",
+      "time": "Timestamp: {value}",
+      "sync": "Sync Frequency: 39,420 Hz (Resonant)",
+      "psi": "Membrane Potential (Ψm): {value} mV",
+      "atp": "Mitochondrial ATP Flux: {value} uM/s",
+      "stateAutophagy": "Cellular State: Autophagy Active (mTOR Suppressed)",
+      "stateGrowth": "Cellular State: Growth Phase (mTOR Active)",
+      "stability": "Systemic Stability Index: {value} / 100"
+    },
+    "search": {
+      "usage": "Usage: search --manifold \"your query\"",
+      "title": "[VECTOR RETRIEVAL: {count} Matches Found on S^127]",
+      "none": "[VECTOR RETRIEVAL] No matches above threshold. Try different terms.",
+      "match": "> {id}: {title} (Similarity: {sim} · d_G: {dg} rad)"
+    },
+    "sim": {
+      "run": "Executing RK45 ODE Integration over 48h... [OK]",
+      "params": "Fasting window: {f0}h–{f1}h · Workouts at: {w}h",
+      "trace": "Autophagy trace  0h ▸ 48h",
+      "stability": "Phase-Space Stability Index: {value} / 100",
+      "psiPeak": "Ψm peak potential: {value} mV",
+      "export": "Exporting Shader Uniforms:",
+      "bass": "  u_audioBass: {value} (ATP Energy Pulse)",
+      "mid": "  u_audioMid:  {value} (Ψm Field Distortion)",
+      "morph": "  u_morph:     {value} (Autophagy Geometric Morph)",
+      "applied": "Uniforms applied to the hero membrane field.",
+      "bad": "Invalid parameters. Example: simulate --fasting 16-36 --workout 10,34"
+    },
+    "connect": {
+      "usage": "Usage: connect --engine braidmesh",
+      "d1": "[DISPATCHING] Establishing handshake with Braid Mesh Engine...",
+      "d2": "[TRANSFER] Loading Osseos Bio parameters (Frequency: 39,420 Hz | Manifold: S^(d-1))",
+      "d3": "[OK] Redirecting session to braidmesh.com...",
+      "blocked": "Pop-up blocked — open manually:"
+    },
+    "links": { "title": "[SIGNAL CHANNELS]" },
+    "open": {
+      "usage": "Usage: open medium | superme | x",
+      "ok": "[OK] Opening {name} in a new tab...",
+      "blocked": "Pop-up blocked — open manually:"
+    }
+  },
+  "docs": {
+    "d1": { "title": "Mitochondrial Membrane Potential and ROS Generation", "body": "Hyperpolarization of the inner membrane (Ψm > 150 mV) increases electron leakage at Complex I and III, accelerating intracellular oxidative stress." },
+    "d2": { "title": "mTOR–Autophagy Bistability Under Nutrient Deprivation", "body": "Prolonged fasting suppresses mTORC1 and activates ULK1, flipping the cell into a sustained autophagic state with hysteresis on refeeding." },
+    "d3": { "title": "Helfrich Bending Energy of Lipid Bilayers", "body": "Membrane shape follows minimization of mean and Gaussian curvature energy; oxidative lipid damage shifts spontaneous curvature and stiffness." },
+    "d4": { "title": "Zone 2 Training and Mitochondrial Biogenesis", "body": "Sustained low-intensity aerobic work upregulates PGC-1α, increasing mitochondrial density and fat oxidation capacity." },
+    "d5": { "title": "ATP Flux and Proton-Motive Force Coupling", "body": "ATP synthase throughput scales with proton gradient; uncoupling lowers Ψm and reduces ROS at the cost of energy efficiency." },
+    "d6": { "title": "Geometric Clustering of Aging Biomarkers", "body": "Normalized multi-omic biomarker vectors cluster on the hypersphere into distinct longevity phenotypes missed by linear reference ranges." }
+  }
+}
