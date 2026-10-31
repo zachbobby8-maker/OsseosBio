@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osseos Bio — Topological Biophysics Gateway</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Osseos Bio">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name" data-i18n="brand.name">OSSEOS BIO</span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#mission" data-i18n="nav.mission">Mission</a>
+      <a href="#engines" data-i18n="nav.engines">Engines</a>
+      <a href="#offerings" data-i18n="nav.offerings">Offerings</a>
+      <a href="#terminal" data-i18n="nav.terminal">Terminal</a>
+      <a href="#channels" data-i18n="nav.channels">Channels</a>
+    </nav>
+    <button type="button" class="btn btn-primary btn-sm" data-launch="biophysics">
+      <span data-i18n="cta.enterShort">Enter Mesh</span>
+    </button>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <canvas id="shader" class="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero-veil" aria-hidden="true"></div>
+      <div class="hero-inner">
+        <p class="eyebrow" data-i18n="hero.eyebrow">Topological Biophysics &amp; Metabolic Lattice Domain</p>
+        <h1 class="hero-title" data-i18n="hero.title">Biology as a continuous, self-regulating field.</h1>
+        <p class="hero-sub" data-i18n="hero.subtitle">Osseos Bio models the organism as a contact manifold under mechanical, metabolic and energy-flux load — then hands execution to the Braid Mesh engine.</p>
+        <div class="hero-actions">
+          <button type="button" class="btn btn-primary" data-launch="topological_sdf">
+            <span data-i18n="cta.enter">Enter Braid Mesh Engine</span>
+            <span class="arrow" aria-hidden="true">→</span>
+          </button>
+          <a class="btn btn-ghost" href="#terminal" data-i18n="cta.terminal">Open gateway terminal</a>
+        </div>
+        <dl class="telemetry">
+          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v1.08</dd></div>
+          <div><dt data-i18n="tele.freq">FREQ_LOCK</dt><dd data-i18n="tele.freqValue">39,420 Hz Harmonic</dd></div>
+          <div><dt data-i18n="tele.manifold">MANIFOLD</dt><dd data-i18n="tele.manifoldValue">S^(d-1) Continuous Field</dd></div>
+          <div><dt data-i18n="tele.status">STATUS</dt><dd class="online"><span class="pulse" aria-hidden="true"></span><span data-i18n="tele.online">ONLINE</span></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="mission" class="section">
+      <p class="section-index">01</p>
+      <div class="section-body">
+        <h2 data-i18n="mission.title">The Mission</h2>
+        <p class="lead" data-i18n="mission.lead">Engineering biological longevity as a continuous, self-regulating field via Helfrich free energy models and mitochondrial flux dynamics.</p>
+        <p class="muted" data-i18n="mission.body">Conventional analytics read biology through isolated scalar metrics. Osseos Bio tracks structural integrity, autophagy cycles and mitochondrial density as coupled geometry — so drift is visible before degradation shows up.</p>
+      </div>
+    </section>
+
+    <section id="engines" class="section">
+      <p class="section-index">02</p>
+      <div class="section-body">
+        <h2 data-i18n="engines.title">Computational Edges</h2>
+        <div class="cards">
+          <article class="card">
+            <p class="card-tag" data-i18n="engines.m1.tag">Module 01 · ODE</p>
+            <h3 data-i18n="engines.m1.title">Bio-Lattice &amp; Metabolic Resonant Engine</h3>
+            <code class="formula" data-i18n="engines.m1.formula">dΨm/dt · J_ATP · mTOR ⇄ Autophagy</code>
+            <p data-i18n="engines.m1.body">Coupled differential equations for proton-motive force, ATP flux and the bistable switch between growth and cellular cleanup — simulated over continuous 48-hour trajectories.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag" data-i18n="engines.m2.tag">Module 02 · SDF</p>
+            <h3 data-i18n="engines.m2.title">Topological Biophysics &amp; Membrane Mechanics</h3>
+            <code class="formula" data-i18n="engines.m2.formula">E = ∮ ½κ(2H − c₀)² + κ̄K dA</code>
+            <p data-i18n="engines.m2.body">A discretized Helfrich Hamiltonian for bilayer deformation, rendered live as GLSL signed-distance gyroid membranes — the field behind this page.</p>
+          </article>
+          <article class="card">
+            <p class="card-tag" data-i18n="engines.m3.tag">Module 03 · Vector</p>
+            <h3 data-i18n="engines.m3.title">Spherical Biomarker Vector Engine</h3>
+            <code class="formula" data-i18n="engines.m3.formula">d_G(v̂₁, v̂₂) = arccos(v̂₁ · v̂₂)</code>
+            <p data-i18n="engines.m3.body">Normalized multi-omic vectors on the unit hypersphere S^(d-1), clustered by geodesic arc length instead of linear correlation.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="offerings" class="section">
+      <p class="section-index">03</p>
+      <div class="section-body">
+        <h2 data-i18n="offerings.title">Products &amp; Services</h2>
+        <ol class="offer-list">
+          <li class="offer">
+            <span class="offer-num">01</span>
+            <div><h3 data-i18n="offerings.o1.title">Osseos Core Engine</h3><p data-i18n="offerings.o1.body">Python simulation suite mapping 48-hour fasting, workout and recovery protocols.</p></div>
+            <code data-i18n="offerings.o1.deliv">bio_lattice.py + phase-space analytics</code>
+          </li>
+          <li class="offer">
+            <span class="offer-num">02</span>
+            <div><h3 data-i18n="offerings.o2.title">Topological Shader Viewport</h3><p data-i18n="offerings.o2.body">WebGL 2 ray-marched SDF shader showing live lipid membrane stress deformation.</p></div>
+            <code data-i18n="offerings.o2.deliv">GPU viewport + Helfrich curvature stream</code>
+          </li>
+          <li class="offer">
+            <span class="offer-num">03</span>
+            <div><h3 data-i18n="offerings.o3.title">Cybernetic Health Node</h3><p data-i18n="offerings.o3.body">Local, privacy-first terminal running retrieval over literature and personal telemetry.</p></div>
+            <code data-i18n="offerings.o3.deliv">Qdrant / FAISS over PubMed, bioRxiv</code>
+          </li>
+          <li class="offer">
+            <span class="offer-num">04</span>
+            <div><h3 data-i18n="offerings.o4.title">Systemic Entropy Audit</h3><p data-i18n="offerings.o4.body">Continuous-field audit of biological signal-to-noise and cellular energy capacity.</p></div>
+            <code data-i18n="offerings.o4.deliv">Stability Index · Autophagy score · Ψm peak</code>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="terminal" class="section">
+      <p class="section-index">04</p>
+      <div class="section-body">
+        <h2 data-i18n="terminal.title">Gateway Terminal</h2>
+        <p class="muted" data-i18n="terminal.hint">Type a command or tap one below. Try status, search, simulate, or connect.</p>
+        <div class="chips" role="group" aria-label="Quick commands">
+          <button type="button" class="chip" data-cmd="status --node active">status</button>
+          <button type="button" class="chip" data-cmd="search --manifold &quot;mitochondrial membrane potential leak under ROS load&quot;">search</button>
+          <button type="button" class="chip" data-cmd="simulate --fasting 16-36 --workout 10,34 --export-glsl">simulate</button>
+          <button type="button" class="chip" data-cmd="help">help</button>
+          <button type="button" class="chip" data-cmd="links">links</button>
+          <button type="button" class="chip chip-accent" data-cmd="connect --engine braidmesh">connect</button>
+        </div>
+        <div class="term" id="term">
+          <div class="term-bar">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            <span class="term-title" data-i18n="terminal.windowTitle">osseos — gateway session</span>
+            <button type="button" class="term-clear" id="termClear" data-i18n="terminal.clear">Clear</button>
+          </div>
+          <div class="term-out" id="termOut" role="log" aria-live="polite"></div>
+          <form class="term-form" id="termForm" autocomplete="off">
+            <label for="termInput" class="prompt">osseos&gt;</label>
+            <input id="termInput" class="term-input" type="text" spellcheck="false" autocapitalize="off" data-i18n-placeholder="terminal.placeholder" data-i18n-aria-label="terminal.inputLabel" placeholder="type a command">
+            <button type="submit" class="term-run" data-i18n="terminal.run">Run</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section id="mesh" class="section mesh">
+      <p class="section-index">05</p>
+      <div class="section-body">
+        <h2 data-i18n="mesh.title">Mesh Engine Access</h2>
+        <p class="lead" data-i18n="mesh.body">All real-time GLSL ray marching, vector searches and CLI execution run on the Braid Mesh core. Dispatch with Osseos Bio parameters pre-loaded.</p>
+        <div class="routes">
+          <button type="button" class="route" data-launch="topological_sdf">
+            <span class="route-path">/render</span>
+            <span class="route-desc" data-i18n="mesh.render">Shader viewport</span>
+          </button>
+          <button type="button" class="route" data-launch="terminal">
+            <span class="route-path">/terminal</span>
+            <span class="route-desc" data-i18n="mesh.terminal">Full CLI session</span>
+          </button>
+          <button type="button" class="route" data-launch="biophysics">
+            <span class="route-path">/biophysics</span>
+            <span class="route-desc" data-i18n="mesh.biophysics">Metabolic lattice</span>
+          </button>
+        </div>
+        <p class="dispatch-url"><span data-i18n="mesh.target">Target:</span> <code id="dispatchUrl"></code></p>
+        <button type="button" class="btn btn-primary btn-lg" data-launch="topological_sdf">
+          <span data-i18n="cta.enter">Enter Braid Mesh Engine</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="channels" class="section">
+      <p class="section-index">06</p>
+      <div class="section-body">
+        <h2 data-i18n="channels.title">Signal Channels</h2>
+        <p class="muted" data-i18n="channels.body">Research notes, live dialogue and field updates from the Osseos Bio operator.</p>
+        <div class="channels">
+          <a class="channel" href="https://medium.com/@zachbobby8" target="_blank" rel="noopener">
+            <span class="channel-tag" data-i18n="channels.medium.tag">Writing</span>
+            <span class="channel-name">Medium</span>
+            <span class="channel-handle">@zachbobby8</span>
+            <span class="channel-go"><span data-i18n="channels.medium.cta">Read articles</span> <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="channel" href="https://www.superme.ai/bzachs" target="_blank" rel="noopener">
+            <span class="channel-tag" data-i18n="channels.superme.tag">AI Profile</span>
+            <span class="channel-name">Superme</span>
+            <span class="channel-handle">superme.ai/bzachs</span>
+            <span class="channel-go"><span data-i18n="channels.superme.cta">Ask the node</span> <span aria-hidden="true">↗</span></span>
+          </a>
+          <a class="channel" href="https://x.com/topologyflux" target="_blank" rel="noopener">
+            <span class="channel-tag" data-i18n="channels.x.tag">Updates</span>
+            <span class="channel-name">X</span>
+            <span class="channel-handle">@topologyflux</span>
+            <span class="channel-go"><span data-i18n="channels.x.cta">Follow</span> <span aria-hidden="true">↗</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <nav class="footer-links" aria-label="Social links">
+      <a href="https://medium.com/@zachbobby8" target="_blank" rel="noopener">Medium</a>
+      <a href="https://www.superme.ai/bzachs" target="_blank" rel="noopener">Superme</a>
+      <a href="https://x.com/topologyflux" target="_blank" rel="noopener">X @topologyflux</a>
+      <a href="https://braidmesh.com/" target="_blank" rel="noopener">braidmesh.com</a>
+    </nav>
+    <p data-i18n="footer.stack">Python · SciPy RK45 · WebGL 2 · GLSL SDF · S^(d-1) embeddings · Local-first</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" hidden>
+    <span id="toastText"></span>
+    <a id="toastLink" target="_blank" rel="noopener" data-i18n="toast.open">Open link</a>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
