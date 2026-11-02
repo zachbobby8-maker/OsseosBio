@@ -21,7 +21,7 @@
       <a href="#terminal" data-i18n="nav.terminal">Terminal</a>
       <a href="#channels" data-i18n="nav.channels">Channels</a>
     </nav>
-    <button type="button" class="btn btn-primary btn-sm" data-launch="biophysics">
+    <button type="button" class="btn btn-primary btn-sm" data-launch="ness_coupling">
       <span data-i18n="cta.enterShort">Enter Mesh</span>
     </button>
   </header>
@@ -35,14 +35,14 @@
         <h1 class="hero-title" data-i18n="hero.title">Biology as a continuous, self-regulating field.</h1>
         <p class="hero-sub" data-i18n="hero.subtitle">Osseos Bio models the organism as a contact manifold under mechanical, metabolic and energy-flux load — then hands execution to the Braid Mesh engine.</p>
         <div class="hero-actions">
-          <button type="button" class="btn btn-primary" data-launch="topological_sdf">
+          <button type="button" class="btn btn-primary" data-launch="ness_coupling">
             <span data-i18n="cta.enter">Enter Braid Mesh Engine</span>
             <span class="arrow" aria-hidden="true">→</span>
           </button>
           <a class="btn btn-ghost" href="#terminal" data-i18n="cta.terminal">Open gateway terminal</a>
         </div>
         <dl class="telemetry">
-          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v1.08</dd></div>
+          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v1.10</dd></div>
           <div><dt data-i18n="tele.freq">FREQ_LOCK</dt><dd data-i18n="tele.freqValue">39,420 Hz Harmonic</dd></div>
           <div><dt data-i18n="tele.manifold">MANIFOLD</dt><dd data-i18n="tele.manifoldValue">S^(d-1) Continuous Field</dd></div>
           <div><dt data-i18n="tele.status">STATUS</dt><dd class="online"><span class="pulse" aria-hidden="true"></span><span data-i18n="tele.online">ONLINE</span></dd></div>
@@ -119,11 +119,12 @@
       <p class="section-index">04</p>
       <div class="section-body">
         <h2 data-i18n="terminal.title">Gateway Terminal</h2>
-        <p class="muted" data-i18n="terminal.hint">Type a command or tap one below. Try status, search, simulate, or connect.</p>
+        <p class="muted" data-i18n="terminal.hint">Type a command or tap one below. Try status, search, simulate, ness, or connect.</p>
         <div class="chips" role="group" aria-label="Quick commands">
           <button type="button" class="chip" data-cmd="status --node active">status</button>
           <button type="button" class="chip" data-cmd="search --manifold &quot;mitochondrial membrane potential leak under ROS load&quot;">search</button>
           <button type="button" class="chip" data-cmd="simulate --fasting 16-36 --workout 10,34 --export-glsl">simulate</button>
+          <button type="button" class="chip" data-cmd="ness">ness</button>
           <button type="button" class="chip" data-cmd="help">help</button>
           <button type="button" class="chip" data-cmd="links">links</button>
           <button type="button" class="chip chip-accent" data-cmd="connect --engine braidmesh">connect</button>
@@ -141,6 +142,7 @@
             <button type="submit" class="term-run" data-i18n="terminal.run">Run</button>
           </form>
         </div>
+        <p class="term-shortcut"><kbd>Ctrl</kbd> / <kbd>⌘</kbd> + <kbd>Enter</kbd> <span data-i18n="terminal.shortcut">jumps straight into the Braid Mesh terminal.</span></p>
       </div>
     </section>
 
@@ -149,12 +151,19 @@
       <div class="section-body">
         <h2 data-i18n="mesh.title">Mesh Engine Access</h2>
         <p class="lead" data-i18n="mesh.body">All real-time GLSL ray marching, vector searches and CLI execution run on the Braid Mesh core. Dispatch with Osseos Bio parameters pre-loaded.</p>
+        <div class="ness-grid" id="nessMetrics">
+          <div class="metric"><p class="metric-label" data-i18n="ness.freq">Carrier frequency</p><p class="metric-value" id="mFreq"></p></div>
+          <div class="metric"><p class="metric-label" data-i18n="ness.kappa">Membrane rigidity (κc)</p><p class="metric-value" id="mKappa"></p></div>
+          <div class="metric"><p class="metric-label" data-i18n="ness.phi">Micro defect density (φp)</p><p class="metric-value" id="mPhi"></p></div>
+          <div class="metric"><p class="metric-label" data-i18n="ness.geo">Manifold geodesic var</p><p class="metric-value" id="mGeo"></p></div>
+        </div>
+        <p class="muted ness-note" data-i18n="ness.note">These readings ride along with the hand-off as a NESS state token. Run simulate in the terminal to change them.</p>
         <div class="routes">
           <button type="button" class="route" data-launch="topological_sdf">
             <span class="route-path">/render</span>
             <span class="route-desc" data-i18n="mesh.render">Shader viewport</span>
           </button>
-          <button type="button" class="route" data-launch="terminal">
+          <button type="button" class="route" data-launch="terminal_cli">
             <span class="route-path">/terminal</span>
             <span class="route-desc" data-i18n="mesh.terminal">Full CLI session</span>
           </button>
@@ -164,8 +173,8 @@
           </button>
         </div>
         <p class="dispatch-url"><span data-i18n="mesh.target">Target:</span> <code id="dispatchUrl"></code></p>
-        <button type="button" class="btn btn-primary btn-lg" data-launch="topological_sdf">
-          <span data-i18n="cta.enter">Enter Braid Mesh Engine</span>
+        <button type="button" id="launch-mesh-btn" class="btn btn-primary btn-lg btn-block" data-launch="ness_coupling">
+          <span data-i18n="cta.handshake">Initialize handshake · Enter Braid Mesh Engine</span>
           <span class="arrow" aria-hidden="true">→</span>
         </button>
       </div>
