@@ -1,6 +1,33 @@
 {
   "brand": { "name": "OSSEOS BIO" },
-  "nav": { "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "channels": "Channels" },
+  "nav": { "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "channels": "Channels" },
+  "leaf": {
+    "title": "Topological Leaf Monitor",
+    "body": "Live check of whether the system sits on the stable homeostatic leaf L_H or is drifting into boundary decay. Run simulate to change it.",
+    "panelTitle": "OSSEOS BIO // TOPOLOGICAL LEAF DIAGNOSTIC",
+    "matrix": "LKB faithful matrix state",
+    "matrixValue": "M_NAND(i, t1·t2 = {p}) [ACTIVE]",
+    "vin": "LKB input vector v_in",
+    "iw": "Homological intertwiner (I)",
+    "gate": "Gate threshold readout R(v)",
+    "gateIntact": "{value} · Homeostatic boundary intact",
+    "gateDecay": "{value} · Boundary decay detected",
+    "ness": "NESS attractor convergence",
+    "nessStable": "dΣ/dt → 0 · Stable flow leaf L_H",
+    "nessDecay": "dΣ/dt > 0 · Non-equilibrium drift",
+    "stateStable": "STABLE · L_H",
+    "stateDecay": "DECAY"
+  },
+  "upgrade": {
+    "title": "v2.0 system upgrades",
+    "feature": "Feature",
+    "before": "Before",
+    "after": "Now",
+    "r1": { "f": "Braid algebra", "b": "Burau representation (unfaithful for k ≥ 5)", "a": "LKB representation (faithful for all k)" },
+    "r2": { "f": "Logic gate", "b": "Phenomenological flow assumption", "a": "Deterministic NAND gate (M_NAND trace evaluation)" },
+    "r3": { "f": "Shader engine", "b": "Ray-marched noise field", "a": "Homological tensor shader driven by I and M_NAND" },
+    "r4": { "f": "Gateway protocol", "b": "Simple URL hand-off", "a": "LKB vector + intertwiner dispatch to braidmesh.com" }
+  },
   "channels": {
     "title": "Signal Channels",
     "body": "Research notes, live dialogue and field updates from the Osseos Bio operator.",
@@ -75,7 +102,7 @@
   },
   "terminal": {
     "title": "Gateway Terminal",
-    "hint": "Type a command or tap one below. Try status, search, simulate, ness, or connect.",
+    "hint": "Type a command or tap one below. Try status, search, simulate, lkb, ness, or connect.",
     "shortcut": "jumps straight into the Braid Mesh terminal.",
     "windowTitle": "osseos — gateway session",
     "clear": "Clear",
@@ -101,7 +128,7 @@
   },
   "term": {
     "welcome1": "OSSEOS BIO // TOPOLOGICAL BIOPHYSICS NODE",
-    "welcome2": "SYS_ID: OSSEOS-GATEWAY-v1.10 · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
+    "welcome2": "SYS_ID: OSSEOS-GATEWAY-v2.0 · LKB ENGINE · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
     "welcome3": "Type help to list commands.",
     "unknown": "Unknown command: {cmd}. Type help to see available commands.",
     "unknownSuggest": "Unknown command: {cmd}. Did you mean {s}?",
@@ -111,6 +138,7 @@
       "search": "Vector search over longevity literature",
       "simulate": "48h ODE protocol (fasting window, workout hours)",
       "ness": "Show NESS coupling state and hand-off token",
+      "lkb": "LKB input vector, intertwiner and NAND gate readout",
       "connect": "Hand off session to Braid Mesh",
       "links": "List social and research channels",
       "open": "Open a channel in a new tab",
@@ -166,6 +194,17 @@
       "blocked": "Pop-up blocked — open manually:"
     },
     "links": { "title": "[SIGNAL CHANNELS]" },
+    "lkb": {
+      "title": "[LKB TELEMETRY ENGINE v2.0]",
+      "metrics": "Stress {stress} · Ψm {psi} mV · HRV {hrv} · Lactate {lac} · Autophagy {aut}",
+      "vin": "Input state vector v_in = {value}",
+      "iw": "Homological intertwiner I = {value}",
+      "matrix": "Matrix state: M_NAND(i, t1·t2 = {p}) [ACTIVE]",
+      "gateIntact": "R(v) = {value} · Homeostatic boundary intact (leaf L_H)",
+      "gateDecay": "R(v) = {value} · Boundary decay — off the stable leaf",
+      "token": "LKB payload token (Base64):",
+      "next": "Run connect to dispatch v_in and I to braidmesh.com/terminal."
+    },
     "open": {
       "usage": "Usage: open medium | superme | x",
       "ok": "[OK] Opening {name} in a new tab...",
@@ -181,4 +220,3 @@
     "d6": { "title": "Geometric Clustering of Aging Biomarkers", "body": "Normalized multi-omic biomarker vectors cluster on the hypersphere into distinct longevity phenotypes missed by linear reference ranges." }
   }
 }
-
