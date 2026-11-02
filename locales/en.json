@@ -11,7 +11,20 @@
   "cta": {
     "enterShort": "Enter Mesh",
     "enter": "Enter Braid Mesh Engine",
+    "handshake": "Initialize handshake · Enter Braid Mesh Engine",
     "terminal": "Open gateway terminal"
+  },
+  "ness": {
+    "freq": "Carrier frequency",
+    "freqValue": "39,420 Hz · Phase locked",
+    "kappa": "Membrane rigidity (κc)",
+    "kappaValue": "{value} κc* · Optimal",
+    "phi": "Micro defect density (φp)",
+    "phiIntact": "{value} · Intact boundary",
+    "phiStressed": "{value} · Boundary stress",
+    "geo": "Manifold geodesic var",
+    "geoValue": "{value} · S^15 sphere",
+    "note": "These readings ride along with the hand-off as a NESS state token. Run simulate in the terminal to change them."
   },
   "hero": {
     "eyebrow": "Topological Biophysics & Metabolic Lattice Domain",
@@ -62,7 +75,8 @@
   },
   "terminal": {
     "title": "Gateway Terminal",
-    "hint": "Type a command or tap one below. Try status, search, simulate, or connect.",
+    "hint": "Type a command or tap one below. Try status, search, simulate, ness, or connect.",
+    "shortcut": "jumps straight into the Braid Mesh terminal.",
     "windowTitle": "osseos — gateway session",
     "clear": "Clear",
     "placeholder": "type a command, e.g. help",
@@ -87,19 +101,33 @@
   },
   "term": {
     "welcome1": "OSSEOS BIO // TOPOLOGICAL BIOPHYSICS NODE",
-    "welcome2": "SYS_ID: OSSEOS-CORE-v1.08 · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
+    "welcome2": "SYS_ID: OSSEOS-GATEWAY-v1.10 · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
     "welcome3": "Type help to list commands.",
     "unknown": "Unknown command: {cmd}. Type help to see available commands.",
+    "unknownSuggest": "Unknown command: {cmd}. Did you mean {s}?",
     "help": {
       "title": "[AVAILABLE COMMANDS]",
-      "status": "status --node active            Live systemic telemetry",
-      "search": "search --manifold \"query\"       Vector search over longevity literature",
-      "simulate": "simulate --fasting A-B --workout X,Y [--export-glsl]   48h ODE protocol",
-      "connect": "connect --engine braidmesh      Hand off session to Braid Mesh",
-      "links": "links                           List social and research channels",
-      "open": "open medium | superme | x       Open a channel in a new tab",
-      "clear": "clear                           Clear the terminal",
-      "history": "Use ↑ / ↓ to recall previous commands."
+      "status": "Live systemic telemetry",
+      "search": "Vector search over longevity literature",
+      "simulate": "48h ODE protocol (fasting window, workout hours)",
+      "ness": "Show NESS coupling state and hand-off token",
+      "connect": "Hand off session to Braid Mesh",
+      "links": "List social and research channels",
+      "open": "Open a channel in a new tab",
+      "clear": "Clear the terminal",
+      "history": "Use ↑ / ↓ to recall previous commands.",
+      "shortcut": "Ctrl/⌘ + Enter anywhere opens the Braid Mesh terminal."
+    },
+    "ness": {
+      "title": "[NESS COUPLING STATE]",
+      "params": "κc* {kc} · a0 {a0} · b {b} · α {alpha} · β {beta} · μ {mu}",
+      "kappa": "Membrane rigidity: {value} κc*",
+      "phi": "Micro defect density φp: {value}",
+      "height": "Height fluctuation: {value}",
+      "geo": "Geodesic variance (S^15): {value}",
+      "psi": "Membrane potential Ψm: {value} mV",
+      "token": "NESS state token:",
+      "next": "Run connect to dispatch this state to braidmesh.com/terminal."
     },
     "status": {
       "title": "[SYSTEM TELEMETRY STATUS]",
@@ -133,7 +161,7 @@
     "connect": {
       "usage": "Usage: connect --engine braidmesh",
       "d1": "[DISPATCHING] Establishing handshake with Braid Mesh Engine...",
-      "d2": "[TRANSFER] Loading Osseos Bio parameters (Frequency: 39,420 Hz | Manifold: S^(d-1))",
+      "d2": "[TRANSFER] Loading Osseos Bio NESS payload (Frequency: 39,420 Hz | Manifold: S^(d-1) | Mode: {mode})",
       "d3": "[OK] Redirecting session to braidmesh.com...",
       "blocked": "Pop-up blocked — open manually:"
     },
