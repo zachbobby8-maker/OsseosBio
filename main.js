@@ -1,7 +1,7 @@
 (() => {
   const t = (key, values) => window.miniappI18n?.t(key, values) ?? key;
   const $ = (id) => document.getElementById(id);
-  const MESH_ENDPOINT = 'https://braidmesh.com/';
+  const MESH_TARGET = 'https://braidmesh.com/terminal';
   const HISTORY_KEY = 'termHistory';
   const CHANNELS = {
     medium: { label: 'Medium @zachbobby8', url: 'https://medium.com/@zachbobby8' },
@@ -12,16 +12,43 @@
   // Shared field state (driven by the simulator, read by the shader)
   const field = { morph: 0.45, bass: 0.6, mid: 0.4, target: { morph: 0.45, bass: 0.6, mid: 0.4 } };
 
-  /* ---------------- Braid Mesh dispatcher ---------------- */
-  function meshUrl(module = 'biophysics') {
-    const params = new URLSearchParams({
-      origin: 'osseosbio',
-      node: 'osseos_bio',
-      module,
-      freq: '39420',
-      lattice: 'locked',
-    });
-    return `${MESH_ENDPOINT}?${params.toString()}`;
+  /* ---------------- Osseos Gateway v1.10 (NESS coupling hand-off) ---------------- */
+  const NESS_PARAMS = {
+    node: 'osseos_bio',
+    frequency: '39420',
+    manifold: 'Sd-1',
+    kappa_c_star: '1.0',
+    a0: '2.0',
+    b: '1.0',
+    alpha: '2.0',
+    beta: '10.0',
+    mu: '2.0',
+    lattice: 'locked',
+  };
+
+  // Live telemetry derived from the current (simulated) field state
+  function liveTelemetry() {
+    const { morph, bass, mid } = field.target;
+    return {
+      phi_p: +(0.001 + (1 - bass) * 0.04).toFixed(4),
+      height_fluct: +(0.3 + mid * 0.6).toFixed(3),
+      geodesic_var: +(0.008 + (1 - bass) * 0.02).toFixed(4),
+      psi_m: +(146 + mid * 6).toFixed(1),
+      kappa: +(1.4 + bass * 0.75).toFixed(2),
+      cellular_state: morph >= 0.4 ? 'autophagy_active' : 'growth_phase',
+    };
+  }
+
+  function encodeNessPayload(tel = liveTelemetry()) {
+    // Short readable token: phi_height_geodesic_psi_state (A = autophagy, G = growth)
+    const state = tel.cellular_state === 'autophagy_active' ? 'A' : 'G';
+    return [tel.phi_p, tel.height_fluct, tel.geodesic_var, tel.psi_m, state].join('_');
+  }
+
+  const MODE_SHORT = { ness_coupling: 'ness', terminal_cli: 'cli', topological_sdf: 'sdf', biophysics: 'bio' };
+  function meshUrl(mode = 'ness_coupling') {
+    const params = new URLSearchParams({ node: 'osseos', mode: MODE_SHORT[mode] || 'ness', v: encodeNessPayload() });
+    return `${MESH_TARGET}?${params.toString()}`;
   }
 
   let toastTimer;
@@ -35,9 +62,9 @@
     toastTimer = setTimeout(() => { $('toast').hidden = true; }, 7000);
   }
 
-  function launchMeshEngine(module = 'biophysics') {
-    const url = meshUrl(module);
-    console.log(`[OSSEOS BIO] Hand-off to Braid Mesh: ${url}`);
+  function launchMeshEngine(mode = 'ness_coupling') {
+    const url = meshUrl(mode);
+    console.log(`[OSSEOS GATEWAY] Handshake initialized -> Dispatching to: ${url}`);
     let win = null;
     try { win = window.open(url, '_blank'); } catch (e) { win = null; }
     if (win) {
@@ -52,8 +79,24 @@
   document.querySelectorAll('[data-launch]').forEach((btn) => {
     btn.addEventListener('click', () => launchMeshEngine(btn.dataset.launch));
   });
-  const dispatchEl = $('dispatchUrl');
-  if (dispatchEl) dispatchEl.textContent = meshUrl('topological_sdf');
+
+  function renderMetrics() {
+    const tel = liveTelemetry();
+    const set = (id, text) => { const el = $(id); if (el) el.textContent = text; };
+    set('mFreq', t('ness.freqValue'));
+    set('mKappa', t('ness.kappaValue', { value: tel.kappa.toFixed(2) }));
+    set('mPhi', t(tel.phi_p < 0.01 ? 'ness.phiIntact' : 'ness.phiStressed', { value: tel.phi_p.toFixed(3) }));
+    set('mGeo', t('ness.geoValue', { value: tel.geodesic_var.toFixed(3) }));
+    set('dispatchUrl', meshUrl('ness_coupling'));
+  }
+
+  // Cmd/Ctrl + Enter anywhere: jump straight into the Braid Mesh terminal
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      launchMeshEngine('terminal_cli');
+    }
+  });
 
   /* ---------------- Vector search (S^127) ---------------- */
   const DIM = 128;
@@ -85,12 +128,13 @@
   let corpus = null;
   function getCorpus() {
     if (corpus) return corpus;
-    corpus = DOC_IDS.map((id, i) => {
+    const built = DOC_IDS.map((id, i) => {
       const title = t(`docs.${id}.title`);
       const body = t(`docs.${id}.body`);
       return { id: `DOC_00${i + 1}`, title, body, vec: embed(`${title} ${title} ${body}`) };
     });
-    return corpus;
+    if (built[0].title !== 'docs.d1.title') corpus = built;
+    return built;
   }
   function vectorSearch(query) {
     const q = embed(query);
@@ -181,6 +225,36 @@
 
   const fmt = (n, d = 2) => Number(n).toFixed(d);
 
+  const HELP = [
+    ['status', 'status --node active'],
+    ['search', 'search --manifold "query"'],
+    ['simulate', 'simulate --fasting 16-36 --workout 10,34 --export-glsl'],
+    ['ness', 'ness'],
+    ['connect', 'connect --engine braidmesh [--mode terminal_cli]'],
+    ['links', 'links'],
+    ['open', 'open medium | superme | x'],
+    ['clear', 'clear'],
+  ];
+  const COMMANDS = HELP.map(([k]) => k).concat('help');
+
+  function helpRow(syntax, desc) {
+    const p = document.createElement('p');
+    p.className = 'term-line h-row';
+    const c = document.createElement('span');
+    c.className = 'h-cmd';
+    c.textContent = syntax;
+    const d = document.createElement('span');
+    d.className = 'h-desc';
+    d.textContent = desc;
+    p.append(c, d);
+    out.appendChild(p);
+  }
+
+  function suggest(cmd) {
+    if (!cmd) return null;
+    return COMMANDS.find((c) => c.startsWith(cmd) || cmd.startsWith(c)) || null;
+  }
+
   function linkLine(label, url) {
     const p = line(`  ${label}  `, 'l-val');
     const a = document.createElement('a');
@@ -191,7 +265,8 @@
   }
 
   async function run(raw) {
-    const text = raw.trim();
+    // Accept pasted lines like "osseos> status" or "osseosbio> connect --engine braidmesh"
+    const text = String(raw || '').replace(/^\s*(?:osseos(?:bio)?\s*>|\$|>)\s*/i, '').trim();
     if (!text) return;
     echo(text);
     if (history[history.length - 1] !== text) {
@@ -205,9 +280,25 @@
     switch (cmd) {
       case 'help':
         line(t('term.help.title'), 'l-head');
-        ['status', 'search', 'simulate', 'connect', 'links', 'open', 'clear'].forEach((k) => line(t(`term.help.${k}`)));
+        HELP.forEach(([k, syntax]) => helpRow(syntax, t(`term.help.${k}`)));
         line(t('term.help.history'));
+        line(t('term.help.shortcut'));
         break;
+      case 'ness': {
+        const tel = liveTelemetry();
+        line(t('term.ness.title'), 'l-head');
+        line(t('term.ness.params', { kc: NESS_PARAMS.kappa_c_star, a0: NESS_PARAMS.a0, b: NESS_PARAMS.b, alpha: NESS_PARAMS.alpha, beta: NESS_PARAMS.beta, mu: NESS_PARAMS.mu }));
+        line(t('term.ness.kappa', { value: tel.kappa.toFixed(2) }), 'l-val');
+        line(t('term.ness.phi', { value: tel.phi_p.toFixed(4) }), 'l-val');
+        line(t('term.ness.height', { value: tel.height_fluct.toFixed(3) }), 'l-val');
+        line(t('term.ness.geo', { value: tel.geodesic_var.toFixed(4) }), 'l-val');
+        line(t('term.ness.psi', { value: tel.psi_m.toFixed(1) }), 'l-val');
+        line(tel.cellular_state === 'autophagy_active' ? t('term.status.stateAutophagy') : t('term.status.stateGrowth'), 'l-ok');
+        line(t('term.ness.token'), 'l-head');
+        line(encodeNessPayload(tel));
+        line(t('term.ness.next'));
+        break;
+      }
       case 'links':
         line(t('term.links.title'), 'l-head');
         Object.values(CHANNELS).forEach((c) => linkLine(c.label, c.url));
@@ -277,16 +368,19 @@
           line(t('term.sim.morph', { value: fmt(res.morph, 3) }));
         }
         field.target = { morph: res.morph, bass: res.bass, mid: res.mid };
+        renderMetrics();
         line(t('term.sim.applied'), 'l-ok');
         break;
       }
       case 'connect': {
-        const engine = String(flags.engine || rest[0] || '').toLowerCase();
+        const engine = String(flags.engine && flags.engine !== true ? flags.engine : (rest[0] || 'braidmesh')).toLowerCase().replace(/\.com$/, '').replace(/[\s_-]/g, '');
         if (engine !== 'braidmesh') { line(t('term.connect.usage'), 'l-err'); break; }
-        const result = launchMeshEngine('topological_sdf');
+        const allowed = ['ness_coupling', 'terminal_cli', 'topological_sdf', 'biophysics'];
+        const mode = typeof flags.mode === 'string' && allowed.includes(flags.mode.toLowerCase()) ? flags.mode.toLowerCase() : 'ness_coupling';
+        const result = launchMeshEngine(mode);
         line(t('term.connect.d1'), 'l-head');
         await sleep(350);
-        line(t('term.connect.d2'));
+        line(t('term.connect.d2', { mode }));
         await sleep(350);
         if (result.ok) {
           line(t('term.connect.d3'), 'l-ok');
@@ -299,8 +393,10 @@
         }
         break;
       }
-      default:
-        line(t('term.unknown', { cmd }), 'l-err');
+      default: {
+        const s = suggest(cmd);
+        line(s ? t('term.unknownSuggest', { cmd, s }) : t('term.unknown', { cmd }), 'l-err');
+      }
     }
     out.scrollTop = out.scrollHeight;
   }
@@ -340,10 +436,13 @@
     chip.addEventListener('click', () => run(chip.dataset.cmd));
   });
 
-  function boot() {
+  function boot(tries = 0) {
+    // Wait briefly for translations so the terminal never shows raw keys
+    if (t('term.welcome1') === 'term.welcome1' && tries < 20) { setTimeout(() => boot(tries + 1), 100); return; }
     line(t('term.welcome1'), 'l-head');
     line(t('term.welcome2'), 'l-ok');
     line(t('term.welcome3'));
+    renderMetrics();
     loadHistory();
     initShader();
   }
@@ -429,6 +528,6 @@ void main(){
     if (reduce) window.addEventListener('resize', () => requestAnimationFrame(frame));
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => boot());
   else boot();
 })();
