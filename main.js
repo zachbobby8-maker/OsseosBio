@@ -1,5 +1,22 @@
 (() => {
-  const t = (key, values) => window.miniappI18n?.t(key, values) ?? key;
+  // Built-in wording backup: if the translation service hasn't loaded (or never does),
+  // read the English wording file directly so raw keys never reach the screen.
+  let FALLBACK = null;
+  const lookup = (key) => key.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), FALLBACK);
+  const fill = (s, values) => (values ? s.replace(/\{(\w+)\}/g, (m, k) => (values[k] !== undefined ? String(values[k]) : m)) : s);
+  const t = (key, values) => {
+    let s;
+    try { s = window.miniappI18n?.t(key, values); } catch (e) { s = undefined; }
+    if (typeof s === 'string' && s && s !== key) return s;
+    const f = FALLBACK ? lookup(key) : undefined;
+    return typeof f === 'string' ? fill(f, values) : key;
+  };
+  async function loadFallback() {
+    try {
+      const res = await fetch('locales/en.json', { cache: 'no-cache' });
+      if (res.ok) FALLBACK = await res.json();
+    } catch (e) { FALLBACK = null; }
+  }
   const $ = (id) => document.getElementById(id);
   const MESH_TARGET = 'https://braidmesh.com/terminal';
   const HISTORY_KEY = 'termHistory';
@@ -449,12 +466,14 @@
     chip.addEventListener('click', () => run(chip.dataset.cmd));
   });
 
-  function boot(tries = 0) {
-    // Wait briefly for translations so the terminal never shows raw keys
-    if (t('term.welcome1') === 'term.welcome1' && tries < 20) { setTimeout(() => boot(tries + 1), 100); return; }
-    line(t('term.welcome1'), 'l-head');
-    line(t('term.welcome2'), 'l-ok');
-    line(t('term.welcome3'));
+  async function boot() {
+    // Load the backup wording first, then wait briefly for translations
+    await loadFallback();
+    let tries = 0;
+    while (t('term.welcome1') === 'term.welcome1' && tries < 10) { await sleep(100); tries += 1; }
+    line(tv('term.welcome1', null, 'OSSEOS BIO // TOPOLOGICAL BIOPHYSICS NODE'), 'l-head');
+    line(tv('term.welcome2', null, 'SYS_ID: OSSEOS-GATEWAY-v1.10 · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]'), 'l-ok');
+    line(tv('term.welcome3', null, 'Type help to list commands.'));
     renderMetrics();
     loadHistory();
     initShader();
