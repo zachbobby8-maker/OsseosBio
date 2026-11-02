@@ -19,6 +19,7 @@
       <a href="#engines" data-i18n="nav.engines">Engines</a>
       <a href="#offerings" data-i18n="nav.offerings">Offerings</a>
       <a href="#terminal" data-i18n="nav.terminal">Terminal</a>
+      <a href="#leaf" data-i18n="nav.leaf">Leaf Monitor</a>
       <a href="#channels" data-i18n="nav.channels">Channels</a>
     </nav>
     <button type="button" class="btn btn-primary btn-sm" data-launch="ness_coupling">
@@ -42,7 +43,7 @@
           <a class="btn btn-ghost" href="#terminal" data-i18n="cta.terminal">Open gateway terminal</a>
         </div>
         <dl class="telemetry">
-          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v1.10</dd></div>
+          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v2.0 · LKB</dd></div>
           <div><dt data-i18n="tele.freq">FREQ_LOCK</dt><dd data-i18n="tele.freqValue">39,420 Hz Harmonic</dd></div>
           <div><dt data-i18n="tele.manifold">MANIFOLD</dt><dd data-i18n="tele.manifoldValue">S^(d-1) Continuous Field</dd></div>
           <div><dt data-i18n="tele.status">STATUS</dt><dd class="online"><span class="pulse" aria-hidden="true"></span><span data-i18n="tele.online">ONLINE</span></dd></div>
@@ -119,12 +120,13 @@
       <p class="section-index">04</p>
       <div class="section-body">
         <h2 data-i18n="terminal.title">Gateway Terminal</h2>
-        <p class="muted" data-i18n="terminal.hint">Type a command or tap one below. Try status, search, simulate, ness, or connect.</p>
+        <p class="muted" data-i18n="terminal.hint">Type a command or tap one below. Try status, search, simulate, lkb, ness, or connect.</p>
         <div class="chips" role="group" aria-label="Quick commands">
           <button type="button" class="chip" data-cmd="status --node active">status</button>
           <button type="button" class="chip" data-cmd="search --manifold &quot;mitochondrial membrane potential leak under ROS load&quot;">search</button>
           <button type="button" class="chip" data-cmd="simulate --fasting 16-36 --workout 10,34 --export-glsl">simulate</button>
           <button type="button" class="chip" data-cmd="ness">ness</button>
+          <button type="button" class="chip" data-cmd="lkb">lkb</button>
           <button type="button" class="chip" data-cmd="help">help</button>
           <button type="button" class="chip" data-cmd="links">links</button>
           <button type="button" class="chip chip-accent" data-cmd="connect --engine braidmesh">connect</button>
@@ -146,8 +148,57 @@
       </div>
     </section>
 
-    <section id="mesh" class="section mesh">
+    <section id="leaf" class="section">
       <p class="section-index">05</p>
+      <div class="section-body">
+        <h2 data-i18n="leaf.title">Topological Leaf Monitor</h2>
+        <p class="muted" data-i18n="leaf.body">Live check of whether the system sits on the stable homeostatic leaf L_H or is drifting into boundary decay. Run simulate to change it.</p>
+        <div class="leaf" id="leafPanel">
+          <div class="leaf-head">
+            <span data-i18n="leaf.panelTitle">OSSEOS BIO // TOPOLOGICAL LEAF DIAGNOSTIC</span>
+            <span class="leaf-badge" id="leafState">L_H</span>
+          </div>
+          <dl class="leaf-rows">
+            <div><dt data-i18n="leaf.matrix">LKB faithful matrix state</dt><dd id="leafMatrix">M_NAND(i, t1·t2) [ACTIVE]</dd></div>
+            <div><dt data-i18n="leaf.vin">LKB input vector v_in</dt><dd id="leafVin">(+1, +1, 1)</dd></div>
+            <div><dt data-i18n="leaf.iw">Homological intertwiner (I)</dt><dd id="leafIw">[0.707, -0.707, 1.000]</dd></div>
+            <div><dt data-i18n="leaf.gate">Gate threshold readout R(v)</dt><dd id="leafGate">1.000</dd></div>
+            <div><dt data-i18n="leaf.ness">NESS attractor convergence</dt><dd id="leafNess">dΣ/dt → 0</dd></div>
+          </dl>
+        </div>
+        <h3 class="upgrade-title" data-i18n="upgrade.title">v2.0 system upgrades</h3>
+        <div class="upgrade-table" role="table" aria-label="System upgrades">
+          <div class="u-row u-head" role="row">
+            <span role="columnheader" data-i18n="upgrade.feature">Feature</span>
+            <span role="columnheader" data-i18n="upgrade.before">Before</span>
+            <span role="columnheader" data-i18n="upgrade.after">Now</span>
+          </div>
+          <div class="u-row" role="row">
+            <span role="cell" data-i18n="upgrade.r1.f">Braid algebra</span>
+            <span role="cell" data-i18n="upgrade.r1.b">Burau representation (unfaithful for k ≥ 5)</span>
+            <span role="cell" data-i18n="upgrade.r1.a">LKB representation (faithful for all k)</span>
+          </div>
+          <div class="u-row" role="row">
+            <span role="cell" data-i18n="upgrade.r2.f">Logic gate</span>
+            <span role="cell" data-i18n="upgrade.r2.b">Phenomenological flow assumption</span>
+            <span role="cell" data-i18n="upgrade.r2.a">Deterministic NAND gate (M_NAND trace evaluation)</span>
+          </div>
+          <div class="u-row" role="row">
+            <span role="cell" data-i18n="upgrade.r3.f">Shader engine</span>
+            <span role="cell" data-i18n="upgrade.r3.b">Ray-marched noise field</span>
+            <span role="cell" data-i18n="upgrade.r3.a">Homological tensor shader driven by I and M_NAND</span>
+          </div>
+          <div class="u-row" role="row">
+            <span role="cell" data-i18n="upgrade.r4.f">Gateway protocol</span>
+            <span role="cell" data-i18n="upgrade.r4.b">Simple URL hand-off</span>
+            <span role="cell" data-i18n="upgrade.r4.a">LKB vector + intertwiner dispatch to braidmesh.com</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="mesh" class="section mesh">
+      <p class="section-index">06</p>
       <div class="section-body">
         <h2 data-i18n="mesh.title">Mesh Engine Access</h2>
         <p class="lead" data-i18n="mesh.body">All real-time GLSL ray marching, vector searches and CLI execution run on the Braid Mesh core. Dispatch with Osseos Bio parameters pre-loaded.</p>
@@ -181,7 +232,7 @@
     </section>
 
     <section id="channels" class="section">
-      <p class="section-index">06</p>
+      <p class="section-index">07</p>
       <div class="section-body">
         <h2 data-i18n="channels.title">Signal Channels</h2>
         <p class="muted" data-i18n="channels.body">Research notes, live dialogue and field updates from the Osseos Bio operator.</p>
@@ -224,6 +275,6 @@
     <a id="toastLink" target="_blank" rel="noopener" data-i18n="toast.open">Open link</a>
   </div>
 
-  <script src="main.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
