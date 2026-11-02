@@ -80,14 +80,27 @@
     btn.addEventListener('click', () => launchMeshEngine(btn.dataset.launch));
   });
 
+  // Translate, but never show a raw key: fall back to the bare reading
+  const tv = (key, values, fallback) => {
+    const s = t(key, values);
+    return !s || s === key ? fallback : s;
+  };
+  let metricRetries = 0;
   function renderMetrics() {
     const tel = liveTelemetry();
     const set = (id, text) => { const el = $(id); if (el) el.textContent = text; };
-    set('mFreq', t('ness.freqValue'));
-    set('mKappa', t('ness.kappaValue', { value: tel.kappa.toFixed(2) }));
-    set('mPhi', t(tel.phi_p < 0.01 ? 'ness.phiIntact' : 'ness.phiStressed', { value: tel.phi_p.toFixed(3) }));
-    set('mGeo', t('ness.geoValue', { value: tel.geodesic_var.toFixed(3) }));
+    const kappa = tel.kappa.toFixed(2);
+    const phi = tel.phi_p.toFixed(3);
+    const geo = tel.geodesic_var.toFixed(3);
+    set('mKappa', tv('ness.kappaValue', { value: kappa }, `${kappa} κc*`));
+    set('mPhi', tv(tel.phi_p < 0.01 ? 'ness.phiIntact' : 'ness.phiStressed', { value: phi }, phi));
+    set('mGeo', tv('ness.geoValue', { value: geo }, `${geo} · S^15`));
     set('dispatchUrl', meshUrl('ness_coupling'));
+    // If wording wasn't ready yet, re-render shortly once it loads
+    if (t('ness.kappaValue', { value: 1 }) === 'ness.kappaValue' && metricRetries < 30) {
+      metricRetries += 1;
+      setTimeout(renderMetrics, 200);
+    }
   }
 
   // Cmd/Ctrl + Enter anywhere: jump straight into the Braid Mesh terminal
