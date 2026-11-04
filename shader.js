@@ -1,17 +1,19 @@
 /**
  * Homological tensor shader: gyroid SDF membrane driven by the field state,
- * the LKB intertwiner I (vec3) and the NAND gate readout.
+ * the LKB intertwiner I (vec3), the NAND gate readout and the resonance store.
  */
+import { resonance } from './resonance.js';
+
 export function initShader(canvas, field, getLkb) {
   const gl = canvas?.getContext('webgl', { antialias: false, premultipliedAlpha: false });
   if (!gl) return;
   const vs = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
   const fs = `precision mediump float;
 uniform vec2 r;uniform float time;uniform float morph;uniform float bass;uniform float mid;uniform float off;
-uniform vec3 iw;uniform float gate;
+uniform vec3 iw;uniform float gate;uniform float res;uniform float spin;
 mat2 rot(float a){float c=cos(a),s=sin(a);return mat2(c,-s,s,c);}
 float map(vec3 p){
-  p.xz*=rot(time*.15);p.xy*=rot(time*.07);
+  p.xz*=rot(time*.15+spin+res*.01*sin(time*39.42));p.xy*=rot(time*.07);
   float sc=2.6+morph*2.2;
   vec3 q=p*sc+vec3(0.,0.,time*.3);
   float g=abs(dot(sin(q),cos(q.yzx)+mid*.25*sin(q.zxy*2.+time)))/sc-(.035+.03*bass);
@@ -35,6 +37,7 @@ void main(){
     vec3 base=mix(teal,amber,smoothstep(.6,1.5,length(p))*(.4+.6*morph));
     base=mix(base,amber,(1.-gate)*.55*band);
     col=base*(.15+.75*dif)+rim*mix(amber,teal,gate)*.8;
+    col+=amber*rim*res*1.2+amber*.12*res*band;
     col=mix(col,vec3(.027,.035,.043),smoothstep(2.5,5.,d));
   }
   gl_FragColor=vec4(col,1.);
@@ -53,9 +56,9 @@ void main(){
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const u = {};
-  ['r', 'time', 'morph', 'bass', 'mid', 'off', 'iw', 'gate'].forEach((k) => { u[k] = gl.getUniformLocation(prog, k); });
+  ['r', 'time', 'morph', 'bass', 'mid', 'off', 'iw', 'gate', 'res', 'spin'].forEach((k) => { u[k] = gl.getUniformLocation(prog, k); });
 
-  const live = { iw: [0.7, -0.7, 1], gate: 1 };
+  const live = { iw: [0.7, -0.7, 1], gate: 1, res: 0, spin: 0 };
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let visible = true;
   new IntersectionObserver(([en]) => { visible = en.isIntersecting; }).observe(canvas);
@@ -74,6 +77,8 @@ void main(){
       const lkb = getLkb();
       live.iw = live.iw.map((x, i) => x + (lkb.intertwiner[i] - x) * 0.03);
       live.gate += (lkb.gate - live.gate) * 0.03;
+      live.res += ((resonance.isResonating ? resonance.intensity : 0) - live.res) * 0.04;
+      live.spin += (resonance.spin > 0 ? 0.12 : 0);
       const aspect = canvas.width / canvas.height;
       gl.uniform2f(u.r, canvas.width, canvas.height);
       gl.uniform1f(u.time, reduce ? 4 : (now - start) / 1000);
@@ -82,6 +87,8 @@ void main(){
       gl.uniform1f(u.mid, field.mid);
       gl.uniform3f(u.iw, live.iw[0], live.iw[1], live.iw[2]);
       gl.uniform1f(u.gate, live.gate);
+      gl.uniform1f(u.res, live.res);
+      gl.uniform1f(u.spin, live.spin);
       gl.uniform1f(u.off, aspect > 1.2 ? Math.min(0.45, (aspect - 1) * 0.35) : 0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     }
