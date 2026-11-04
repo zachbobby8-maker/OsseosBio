@@ -203,3 +203,4 @@ section[id], main[id] { scroll-margin-top: 72px; }
   .hero-inner { padding: var(--s7) var(--s4) var(--s6); }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pulse { animation: none; } }
+
