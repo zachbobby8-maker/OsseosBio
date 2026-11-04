@@ -1,0 +1,71 @@
+/* Aethergeist chat-node: floating orb + translucent filament panel (uses tokens from styles.css) */
+.aether { position: fixed; left: var(--s4); bottom: var(--s4); z-index: 25; font-family: var(--font-sans); }
+.ae-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.ae-orb {
+  position: relative; width: 56px; height: 56px; border-radius: 50%; cursor: pointer; padding: 0;
+  border: 1px solid color-mix(in srgb, var(--primary) 45%, transparent);
+  background: radial-gradient(circle at 38% 34%, color-mix(in srgb, var(--text) 70%, transparent) 0, color-mix(in srgb, var(--primary) 40%, transparent) 30%, color-mix(in srgb, var(--bg) 60%, transparent) 72%);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 24px color-mix(in srgb, var(--primary) 30%, transparent);
+  animation: ae-breathe 4s ease-in-out infinite;
+}
+.ae-orb:hover { box-shadow: 0 0 34px color-mix(in srgb, var(--primary) 50%, transparent); }
+.ae-core { position: absolute; inset: 20px; border-radius: 50%; background: var(--text); opacity: .85; filter: blur(2px); }
+.ae-ring { position: absolute; inset: -5px; border-radius: 50%; border: 1px dashed color-mix(in srgb, var(--primary) 55%, transparent); animation: ae-spin 14s linear infinite; }
+.aether.is-thinking .ae-ring { border-color: var(--accent); animation-duration: 1.4s; }
+.aether.is-thinking .ae-core { background: var(--accent); }
+.aether.is-open .ae-orb { animation: none; }
+
+.ae-panel {
+  position: absolute; left: 0; bottom: 72px; width: min(380px, calc(100vw - 32px)); max-height: min(560px, 72vh);
+  display: flex; flex-direction: column; overflow: hidden;
+  background: color-mix(in srgb, var(--surface) 78%, transparent); backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--line)); border-radius: var(--r-lg);
+  box-shadow: 0 20px 60px color-mix(in srgb, var(--bg) 80%, transparent);
+  animation: ae-rise .25s ease-out;
+}
+.ae-head { display: flex; align-items: center; gap: var(--s2); padding: var(--s3) var(--s3) var(--s3) var(--s4); border-bottom: 1px solid var(--line); }
+.ae-title { margin: 0; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; font-size: 13px; }
+.ae-status { flex: 1; font-family: var(--font-mono); font-size: 11px; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.aether.is-thinking .ae-status { color: var(--accent); }
+.ae-icon-btn, .ae-reset {
+  min-height: 36px; min-width: 36px; border-radius: var(--r-sm); border: 1px solid var(--line); background: transparent;
+  color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; padding: 0 var(--s2);
+}
+.ae-icon-btn:hover, .ae-reset:hover { color: var(--text); border-color: var(--primary); }
+.ae-icon-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.8; }
+
+.ae-log { flex: 1; overflow-y: auto; padding: var(--s4); display: flex; flex-direction: column; gap: var(--s3); min-height: 180px; }
+.ae-msg { max-width: 92%; font-size: 15px; line-height: 1.55; word-break: break-word; }
+.ae-user { align-self: flex-end; background: color-mix(in srgb, var(--primary) 14%, transparent); border: 1px solid color-mix(in srgb, var(--primary) 30%, transparent); border-radius: var(--r-md); padding: var(--s2) var(--s3); }
+.ae-node { align-self: flex-start; color: var(--text); padding-left: var(--s3); border-left: 1px solid color-mix(in srgb, var(--text) 40%, transparent); text-shadow: 0 0 10px color-mix(in srgb, var(--text) 35%, transparent); }
+.ae-error { align-self: flex-start; color: var(--accent); font-family: var(--font-mono); font-size: 13px; padding-left: var(--s3); border-left: 1px solid var(--accent); }
+.ae-fil { display: inline-block; animation: ae-grow .6s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 32ms); transform-origin: 0 100%; }
+
+.ae-suggest { display: flex; flex-wrap: wrap; gap: var(--s2); padding: 0 var(--s4) var(--s3); }
+.ae-chip { min-height: 36px; padding: 0 var(--s3); border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); font-size: 13px; cursor: pointer; text-align: left; }
+.ae-chip:hover { color: var(--primary); border-color: var(--primary); }
+
+.ae-form { display: flex; gap: var(--s2); padding: var(--s3); border-top: 1px solid var(--line); }
+.ae-input { flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--s3); border-radius: var(--r-sm); border: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 70%, transparent); font-size: 16px; outline: none; }
+.ae-input:focus { border-color: var(--primary); }
+.ae-input:disabled { opacity: .6; }
+.ae-send { min-height: 44px; padding: 0 var(--s4); border-radius: var(--r-sm); border: 0; background: var(--primary); color: var(--primary-ink); font-weight: 600; cursor: pointer; }
+.ae-send:disabled { opacity: .5; cursor: progress; }
+
+@keyframes ae-breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.06); } }
+@keyframes ae-spin { to { transform: rotate(360deg); } }
+@keyframes ae-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes ae-grow {
+  0% { opacity: 0; filter: blur(5px); transform: scaleY(.15) translateY(6px); letter-spacing: .4em; }
+  60% { opacity: 1; filter: blur(.5px); }
+  100% { opacity: 1; filter: none; transform: none; letter-spacing: normal; }
+}
+@media (max-width: 640px) {
+  .aether { left: var(--s3); bottom: var(--s3); }
+  .ae-panel { max-height: 66vh; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ae-orb, .ae-ring, .ae-panel, .ae-fil { animation: none !important; }
+}
