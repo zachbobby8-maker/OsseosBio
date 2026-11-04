@@ -1,6 +1,47 @@
 {
   "brand": { "name": "OSSEOS BIO" },
-  "nav": { "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "channels": "Channels" },
+  "nav": { "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "symbio": "Symbio-CAD", "sectors": "Sectors", "channels": "Channels" },
+  "sync": { "label": "39.42k Bio-Sync: ACTIVE" },
+  "symbio": {
+    "eyebrow": "Symbio-CAD Tuner",
+    "title1": "We are not built.",
+    "title2": "We are woven.",
+    "body": "Weave the Legendrian braid live. Change the winding numbers, set the tissue state, then hit Resonate to ignite the manifold.",
+    "canvasLabel": "Live braided torus knot manifold",
+    "weaveP": "Weave_P (Winding)",
+    "weaveQ": "Weave_Q (Meridian)",
+    "phaseLabel": "Manifold state",
+    "phase": { "fluid": "Fluid", "gel": "Gel", "crystal": "Crystal" },
+    "intensity": "Resonance_Δ (Hz)",
+    "intensityToggle": "Switch resonance intensity between high and low",
+    "resonate": "[ RESONATE ]",
+    "resonating": "[ RESONATING ]",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off",
+    "single": "Single knotted strand · p and q share no factor",
+    "linked": "{n} linked strands · p and q share a factor of {n}",
+    "droneNote": "39,420 Hz is above human hearing, so the drone plays its audible sub-harmonic at 157.68 Hz."
+  },
+  "sectors": {
+    "title": "The Trinity of Growth",
+    "body": "Four sectors where the woven geometry meets living tissue.",
+    "osteo": { "title": "Structural Morphology", "tag": "Topological bone replacements and scaffolds that calcify from ghost wireframe into solid bone." },
+    "neuro": { "title": "Signal & Logic", "tag": "The 1.4M-node manifold wired into neural signalling and bio-feedback loops." },
+    "metabolic": { "title": "The Living Terminal", "tag": "Balancing entropy and energy flow across the connected network." },
+    "eco": { "title": "Architecture that Breathes", "tag": "Scaling Osseos geometry to living building envelopes — Sector 9." }
+  },
+  "bio": {
+    "toggle": "Bio-Control",
+    "carrier": "Carrier",
+    "coherence": "Coherence index",
+    "state": "Vitality",
+    "stateIdle": "Stable",
+    "stateResonating": "Resonating",
+    "stateLocked": "Phase locked",
+    "regen": "Regenerate",
+    "lock": "Lock phase",
+    "evolve": "Evolve"
+  },
   "leaf": {
     "title": "Topological Leaf Monitor",
     "body": "Live check of whether the system sits on the stable homeostatic leaf L_H or is drifting into boundary decay. Run simulate to change it.",
@@ -119,6 +160,7 @@
     "target": "Target:"
   },
   "footer": {
+    "flip": "Flip to Foundry",
     "stack": "Python · SciPy RK45 · WebGL 2 · GLSL SDF · S^(d-1) embeddings · Local-first"
   },
   "toast": {
@@ -128,7 +170,7 @@
   },
   "term": {
     "welcome1": "OSSEOS BIO // TOPOLOGICAL BIOPHYSICS NODE",
-    "welcome2": "SYS_ID: OSSEOS-GATEWAY-v2.0 · LKB ENGINE · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
+    "welcome2": "SYS_ID: OSSEOS-GATEWAY-v3.0 · LKB ENGINE · SYMBIO-CAD · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]",
     "welcome3": "Type help to list commands.",
     "unknown": "Unknown command: {cmd}. Type help to see available commands.",
     "unknownSuggest": "Unknown command: {cmd}. Did you mean {s}?",
@@ -143,6 +185,11 @@
       "links": "List social and research channels",
       "open": "Open a channel in a new tab",
       "clear": "Clear the terminal",
+      "weave": "Set the braid winding numbers (p 2–21, q 2–15)",
+      "resonate": "Ignite or calm the manifold and drone",
+      "evolve": "Introduce a 5iR mutation to the weave",
+      "lock": "Lock or release the phase",
+      "regenerate": "Reset the manifold to its base state",
       "history": "Use ↑ / ↓ to recall previous commands.",
       "shortcut": "Ctrl/⌘ + Enter anywhere opens the Braid Mesh terminal."
     },
@@ -194,6 +241,11 @@
       "blocked": "Pop-up blocked — open manually:"
     },
     "links": { "title": "[SIGNAL CHANNELS]" },
+    "weave": { "ok": "[SYMBIO-CAD] Weave set to T({p}, {q}).", "bad": "Usage: weave --p 13 --q 7 (p 2–21, q 2–15)" },
+    "resonate": { "on": "[RESONANCE] 39,420 Hz applied — manifold ignited.", "off": "[RESONANCE] Released — manifold at rest." },
+    "evolve": { "ok": "[EVOLVE] 5iR mutation applied → T({p}, {q}) · mutation {m}" },
+    "lock": { "on": "[PHASE] Locked — breathing and jitter frozen.", "off": "[PHASE] Released." },
+    "regen": { "ok": "[REGENERATE] Manifold reset to T(13, 7), gel state." },
     "lkb": {
       "title": "[LKB TELEMETRY ENGINE v2.0]",
       "metrics": "Stress {stress} · Ψm {psi} mV · HRV {hrv} · Lactate {lac} · Autophagy {aut}",
@@ -210,6 +262,28 @@
       "ok": "[OK] Opening {name} in a new tab...",
       "blocked": "Pop-up blocked — open manually:"
     }
+  },
+  "aether": {
+    "title": "Aethergeist",
+    "open": "Open the Aethergeist chat",
+    "close": "Close chat",
+    "clear": "Reset",
+    "inputLabel": "Ask the Aethergeist",
+    "placeholder": "Ask the field anything",
+    "send": "Send",
+    "online": "● NODE ONLINE · 39.42k",
+    "thinking": "◌ weaving filaments…",
+    "greeting": "I am the Aethergeist, the living node of Osseos Bio. Ask me about the woven manifold, the 39,420 Hz carrier, or what your loom state means right now.",
+    "s1": "What does my current weave mean?",
+    "s2": "Explain the LKB NAND gate simply",
+    "s3": "How does Osseos connect to Braid Mesh?",
+    "errGeneric": "The filaments frayed — the node couldn't answer. Try again in a moment.",
+    "errCredits": "Not enough credits to wake the node. Top up and try again.",
+    "errSignin": "Sign in to talk with the Aethergeist.",
+    "errTimeout": "The node took too long to answer. Try a shorter question.",
+    "errConsent": "The request was cancelled. Allow the AI prompt to continue.",
+    "termOpen": "[OK] Aethergeist node opened — bottom-left orb.",
+    "termAsk": "[OK] Question sent to the Aethergeist..."
   },
   "docs": {
     "d1": { "title": "Mitochondrial Membrane Potential and ROS Generation", "body": "Hyperpolarization of the inner membrane (Ψm > 150 mV) increases electron leakage at Complex I and III, accelerating intracellular oxidative stress." },
