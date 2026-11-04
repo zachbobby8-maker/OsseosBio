@@ -47,3 +47,4 @@ export function shortLkb(lkb) {
 }
 
 export const fmtVec = (arr, d = 3) => `[${arr.map((x) => Number(x).toFixed(d)).join(', ')}]`;
+
