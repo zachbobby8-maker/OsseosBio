@@ -1,5 +1,7 @@
 import { computeLkb, encodeLkbToken, shortLkb, fmtVec } from './lkb.js';
 import { initShader } from './shader.js';
+import { initSymbio, symbioCommand, SYMBIO_HELP } from './symbio.js';
+import { initAether, aetherCommand } from './aether.js';
 
 (() => {
   // Built-in wording backup: if the translation service hasn't loaded (or never does),
@@ -324,6 +326,7 @@ import { initShader } from './shader.js';
     ['connect', 'connect --engine braidmesh [--mode terminal_cli]'],
     ['links', 'links'],
     ['open', 'open medium | superme | x'],
+    ...SYMBIO_HELP,
     ['clear', 'clear'],
   ];
   const COMMANDS = HELP.map(([k]) => k).concat('help');
@@ -496,6 +499,8 @@ import { initShader } from './shader.js';
         break;
       }
       default: {
+        if (symbioCommand(cmd, flags, rest, line)) break;
+        if (aetherCommand(cmd, rest, line)) break;
         const s = suggest(cmd);
         line(s ? t('term.unknownSuggest', { cmd, s }) : t('term.unknown', { cmd }), 'l-err');
       }
@@ -544,11 +549,13 @@ import { initShader } from './shader.js';
     let tries = 0;
     while (t('term.welcome1') === 'term.welcome1' && tries < 10) { await sleep(100); tries += 1; }
     line(tv('term.welcome1', null, 'OSSEOS BIO // TOPOLOGICAL BIOPHYSICS NODE'), 'l-head');
-    line(tv('term.welcome2', null, 'SYS_ID: OSSEOS-GATEWAY-v2.0 · LKB ENGINE · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]'), 'l-ok');
+    line(tv('term.welcome2', null, 'SYS_ID: OSSEOS-GATEWAY-v3.0 · LKB ENGINE · SYMBIO-CAD · FREQ_LOCK: 39,420 Hz · STATUS: [ONLINE]'), 'l-ok');
     line(tv('term.welcome3', null, 'Type help to list commands.'));
     renderMetrics();
     loadHistory();
     try { initShader($('shader'), field, () => computeLkb(field.target)); } catch (e) { /* shader optional */ }
+    try { initSymbio({ t }); } catch (e) { console.warn('[OSSEOS] Symbio-CAD unavailable', e); }
+    try { initAether({ t }); } catch (e) { console.warn('[OSSEOS] Aethergeist unavailable', e); }
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => boot());
