@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="symbio.css">
+  <link rel="stylesheet" href="aether.css">
 </head>
 <body>
   <header class="topbar">
@@ -20,8 +22,14 @@
       <a href="#offerings" data-i18n="nav.offerings">Offerings</a>
       <a href="#terminal" data-i18n="nav.terminal">Terminal</a>
       <a href="#leaf" data-i18n="nav.leaf">Leaf Monitor</a>
+      <a href="#symbio" data-i18n="nav.symbio">Symbio-CAD</a>
+      <a href="#sectors" data-i18n="nav.sectors">Sectors</a>
       <a href="#channels" data-i18n="nav.channels">Channels</a>
     </nav>
+    <span class="phase-lock" title="Bio-Sync">
+      <span class="phase-dot" id="phaseDot" aria-hidden="true"></span>
+      <span class="phase-lock-label" data-i18n="sync.label">39.42k Bio-Sync: ACTIVE</span>
+    </span>
     <button type="button" class="btn btn-primary btn-sm" data-launch="ness_coupling">
       <span data-i18n="cta.enterShort">Enter Mesh</span>
     </button>
@@ -31,6 +39,17 @@
     <section class="hero">
       <canvas id="shader" class="hero-canvas" aria-hidden="true"></canvas>
       <div class="hero-veil" aria-hidden="true"></div>
+      <svg class="loom-grid" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <g class="lg-lines">
+          <path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M0 300H400M0 350H400"/>
+          <path d="M50 0V400M100 0V400M150 0V400M200 0V400M250 0V400M300 0V400M350 0V400"/>
+        </g>
+        <g class="lg-cross">
+          <circle cx="280" cy="170" r="70"/>
+          <circle cx="280" cy="170" r="110"/>
+          <path d="M280 40V300M150 170H410"/>
+        </g>
+      </svg>
       <div class="hero-inner">
         <p class="eyebrow" data-i18n="hero.eyebrow">Topological Biophysics &amp; Metabolic Lattice Domain</p>
         <h1 class="hero-title" data-i18n="hero.title">Biology as a continuous, self-regulating field.</h1>
@@ -43,7 +62,7 @@
           <a class="btn btn-ghost" href="#terminal" data-i18n="cta.terminal">Open gateway terminal</a>
         </div>
         <dl class="telemetry">
-          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v2.0 · LKB</dd></div>
+          <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v3.0 · LKB · SYMBIO-CAD</dd></div>
           <div><dt data-i18n="tele.freq">FREQ_LOCK</dt><dd data-i18n="tele.freqValue">39,420 Hz Harmonic</dd></div>
           <div><dt data-i18n="tele.manifold">MANIFOLD</dt><dd data-i18n="tele.manifoldValue">S^(d-1) Continuous Field</dd></div>
           <div><dt data-i18n="tele.status">STATUS</dt><dd class="online"><span class="pulse" aria-hidden="true"></span><span data-i18n="tele.online">ONLINE</span></dd></div>
@@ -127,6 +146,8 @@
           <button type="button" class="chip" data-cmd="simulate --fasting 16-36 --workout 10,34 --export-glsl">simulate</button>
           <button type="button" class="chip" data-cmd="ness">ness</button>
           <button type="button" class="chip" data-cmd="lkb">lkb</button>
+          <button type="button" class="chip" data-cmd="weave --p 13 --q 7">weave</button>
+          <button type="button" class="chip" data-cmd="resonate">resonate</button>
           <button type="button" class="chip" data-cmd="help">help</button>
           <button type="button" class="chip" data-cmd="links">links</button>
           <button type="button" class="chip chip-accent" data-cmd="connect --engine braidmesh">connect</button>
@@ -197,8 +218,119 @@
       </div>
     </section>
 
-    <section id="mesh" class="section mesh">
+    <section id="symbio" class="section">
       <p class="section-index">06</p>
+      <div class="section-body">
+        <p class="eyebrow" data-i18n="symbio.eyebrow">Symbio-CAD Tuner</p>
+        <h2 class="woven"><span data-i18n="symbio.title1">We are not built.</span> <span class="amber" data-i18n="symbio.title2">We are woven.</span></h2>
+        <p class="muted" data-i18n="symbio.body">Weave the Legendrian braid live. Change the winding numbers, set the tissue state, then hit Resonate to ignite the manifold.</p>
+        <div class="symbio">
+          <div class="loom-stage">
+            <canvas id="loomCanvas" class="loom-canvas" role="img" data-i18n-aria-label="symbio.canvasLabel" aria-label="Live braided torus knot"></canvas>
+            <svg class="loom-grid loom-grid-stage" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g class="lg-lines">
+                <path d="M0 100H400M0 200H400M0 300H400M100 0V400M200 0V400M300 0V400"/>
+              </g>
+              <g class="lg-cross">
+                <circle cx="200" cy="200" r="150"/>
+                <path d="M200 20V60M200 340V380M20 200H60M340 200H380"/>
+              </g>
+            </svg>
+            <p class="stage-tag stage-tl" id="loomKnot">T(13, 7)</p>
+            <p class="stage-tag stage-tr"><span class="pulse" aria-hidden="true"></span>39.420_HZ_LOCKED</p>
+            <p class="stage-tag stage-bl" id="loomPhaseLabel"></p>
+          </div>
+          <div class="tuner" role="group" aria-label="Symbio-CAD Tuner">
+            <div class="tune-row">
+              <label for="weaveP" class="tune-label" data-i18n="symbio.weaveP">Weave_P (Winding)</label>
+              <output id="weavePVal" for="weaveP" class="tune-val">13</output>
+              <input id="weaveP" class="tune-range" type="range" min="2" max="21" step="1" value="13">
+            </div>
+            <div class="tune-row">
+              <label for="weaveQ" class="tune-label" data-i18n="symbio.weaveQ">Weave_Q (Meridian)</label>
+              <output id="weaveQVal" for="weaveQ" class="tune-val">7</output>
+              <input id="weaveQ" class="tune-range" type="range" min="2" max="15" step="1" value="7">
+            </div>
+            <p class="tune-note" id="weaveNote"></p>
+            <div class="tune-row">
+              <label for="phaseSlider" class="tune-label" data-i18n="symbio.phaseLabel">Manifold state</label>
+              <output id="phaseState" for="phaseSlider" class="tune-val"></output>
+              <input id="phaseSlider" class="tune-range" type="range" min="0" max="100" step="1" value="50">
+              <div class="tune-scale" aria-hidden="true">
+                <span data-i18n="symbio.phase.fluid">Fluid</span><span data-i18n="symbio.phase.gel">Gel</span><span data-i18n="symbio.phase.crystal">Crystal</span>
+              </div>
+            </div>
+            <div class="tune-row tune-inline">
+              <span class="tune-label" data-i18n="symbio.intensity">Resonance_Δ (Hz)</span>
+              <span class="tune-val" id="intensityVal">0.50</span>
+              <button type="button" class="hl-btn" id="intensityBtn" aria-label="Toggle intensity">L</button>
+            </div>
+            <div class="tune-actions">
+              <button type="button" class="btn btn-resonate" id="resonateBtn" aria-pressed="false">
+                <span class="phase-dot" aria-hidden="true"></span><span id="resonateLabel">[ RESONATE ]</span>
+              </button>
+              <button type="button" class="btn btn-ghost btn-sm" id="soundBtn" aria-pressed="true"><span id="soundLabel">Sound on</span></button>
+            </div>
+            <p class="tune-note" data-i18n="symbio.droneNote">39,420 Hz is above human hearing, so the drone plays its audible sub-harmonic at 157.68 Hz.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="sectors" class="section">
+      <p class="section-index">07</p>
+      <div class="section-body">
+        <h2 data-i18n="sectors.title">The Trinity of Growth</h2>
+        <p class="muted" data-i18n="sectors.body">Four sectors where the woven geometry meets living tissue.</p>
+        <div class="sectors">
+          <article class="sector reveal">
+            <p class="sector-code">[OSTEO-GEN]</p>
+            <h3 data-i18n="sectors.osteo.title">Structural Morphology</h3>
+            <p data-i18n="sectors.osteo.tag">Topological bone replacements and scaffolds that calcify from ghost wireframe into solid bone.</p>
+            <pre class="sector-data">Structure_Type: Legendrian_Lattice
+Growth_Mode: Stochastic_Langevin
+Braid_Complexity: 4-Strand_Torus_Knot
+Tensile_Resonance: 39,420 Hz
+Porosity_Mapping: Continuous_Manifold</pre>
+            <p class="sector-foot">39.420_HZ_LOCKED</p>
+          </article>
+          <article class="sector reveal">
+            <p class="sector-code">[NEURO-FLOW]</p>
+            <h3 data-i18n="sectors.neuro.title">Signal &amp; Logic</h3>
+            <p data-i18n="sectors.neuro.tag">The 1.4M-node manifold wired into neural signalling and bio-feedback loops.</p>
+            <pre class="sector-data">uniform float phase_error = 5.50e-16;
+uniform float carrier_wave = 39420.0;
+float synapse_sync =
+  sin(time * carrier_wave + pos.y);</pre>
+            <p class="sector-foot">39.420_HZ_LOCKED</p>
+          </article>
+          <article class="sector reveal">
+            <p class="sector-code">[METABOLIC-SYNC]</p>
+            <h3 data-i18n="sectors.metabolic.title">The Living Terminal</h3>
+            <p data-i18n="sectors.metabolic.tag">Balancing entropy and energy flow across the connected network.</p>
+            <pre class="sector-data">OSSEOS_BIO &gt;&gt; init --substrate=organic
+System_Status: PHASE_LOCKED
+Entropy_Sink: ACTIVE [-82.4%]
+Loom_Tension: OPTIMAL</pre>
+            <p class="sector-foot">39.420_HZ_LOCKED</p>
+          </article>
+          <article class="sector reveal">
+            <p class="sector-code">[ECO-HABITAT]</p>
+            <h3 data-i18n="sectors.eco.title">Architecture that Breathes</h3>
+            <p data-i18n="sectors.eco.tag">Scaling Osseos geometry to living building envelopes — Sector 9.</p>
+            <pre class="sector-data">{
+  "Envelope": "Continuous_Topological_Manifold",
+  "Resonance_Wall": "39.42kHz_Oscillation",
+  "Structural_DNA": "Mobius_Braid_Signature_v3"
+}</pre>
+            <p class="sector-foot">39.420_HZ_LOCKED</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="mesh" class="section mesh">
+      <p class="section-index">08</p>
       <div class="section-body">
         <h2 data-i18n="mesh.title">Mesh Engine Access</h2>
         <p class="lead" data-i18n="mesh.body">All real-time GLSL ray marching, vector searches and CLI execution run on the Braid Mesh core. Dispatch with Osseos Bio parameters pre-loaded.</p>
@@ -232,7 +364,7 @@
     </section>
 
     <section id="channels" class="section">
-      <p class="section-index">07</p>
+      <p class="section-index">09</p>
       <div class="section-body">
         <h2 data-i18n="channels.title">Signal Channels</h2>
         <p class="muted" data-i18n="channels.body">Research notes, live dialogue and field updates from the Osseos Bio operator.</p>
@@ -267,13 +399,60 @@
       <a href="https://x.com/topologyflux" target="_blank" rel="noopener">X @topologyflux</a>
       <a href="https://braidmesh.com/" target="_blank" rel="noopener">braidmesh.com</a>
     </nav>
+    <a class="flip-link" id="flipFoundry" href="https://braidmesh.com/" target="_blank" rel="noopener"><span data-i18n="footer.flip">Flip to Foundry</span> <span class="mono">[ 720° ]</span></a>
     <p data-i18n="footer.stack">Python · SciPy RK45 · WebGL 2 · GLSL SDF · S^(d-1) embeddings · Local-first</p>
   </footer>
+
+  <aside class="bioctl" id="bioctl" aria-label="Bio-Control">
+    <button type="button" class="bioctl-toggle" id="bioctlToggle" aria-expanded="false" aria-controls="bioctlBody">
+      <span class="phase-dot" aria-hidden="true"></span>
+      <span data-i18n="bio.toggle">Bio-Control</span>
+    </button>
+    <div class="bioctl-body" id="bioctlBody" hidden>
+      <p class="bioctl-id">BIOMETRIC_ID: @TOPOLOGYFLUX <span class="amber">[ARCHITECT]</span></p>
+      <canvas class="wave" id="waveCanvas" aria-hidden="true"></canvas>
+      <dl class="bioctl-rows">
+        <div><dt data-i18n="bio.carrier">Carrier</dt><dd>39,420 Hz</dd></div>
+        <div><dt>Δφ</dt><dd id="phaseErr">5.50e-16 rad</dd></div>
+        <div><dt data-i18n="bio.coherence">Coherence index</dt><dd id="bioCoherence">0.9982</dd></div>
+        <div><dt data-i18n="bio.state">Vitality</dt><dd id="bioState"></dd></div>
+      </dl>
+      <div class="bioctl-actions">
+        <button type="button" class="hud-btn" id="btnRegen" data-i18n="bio.regen">Regenerate</button>
+        <button type="button" class="hud-btn" id="btnLock" aria-pressed="false" data-i18n="bio.lock">Lock phase</button>
+        <button type="button" class="hud-btn hud-amber" id="btnEvolve" data-i18n="bio.evolve">Evolve</button>
+      </div>
+    </div>
+  </aside>
 
   <div class="toast" id="toast" role="status" hidden>
     <span id="toastText"></span>
     <a id="toastLink" target="_blank" rel="noopener" data-i18n="toast.open">Open link</a>
   </div>
+
+  <aside class="aether" id="aether" data-i18n-aria-label="aether.title" aria-label="Aethergeist">
+    <div class="ae-panel" id="aePanel" role="dialog" aria-labelledby="aeTitle" hidden>
+      <div class="ae-head">
+        <p class="ae-title" id="aeTitle" data-i18n="aether.title">Aethergeist</p>
+        <span class="ae-status" id="aeStatus"></span>
+        <button type="button" class="ae-reset" id="aeClear" data-i18n="aether.clear">Reset</button>
+        <button type="button" class="ae-icon-btn" id="aeClose" data-i18n-aria-label="aether.close" aria-label="Close">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <div class="ae-log" id="aeLog" role="log" aria-live="polite"></div>
+      <div class="ae-suggest" id="aeSuggest"></div>
+      <form class="ae-form" id="aeForm" autocomplete="off">
+        <label for="aeInput" class="ae-sr" data-i18n="aether.inputLabel">Ask the Aethergeist</label>
+        <input id="aeInput" class="ae-input" type="text" maxlength="600" data-i18n-placeholder="aether.placeholder" placeholder="Ask the field anything">
+        <button type="submit" class="ae-send" id="aeSend" data-i18n="aether.send">Send</button>
+      </form>
+    </div>
+    <button type="button" class="ae-orb" id="aeOrb" aria-expanded="false" aria-controls="aePanel" data-i18n-aria-label="aether.open" aria-label="Open the Aethergeist chat">
+      <span class="ae-ring" aria-hidden="true"></span>
+      <span class="ae-core" aria-hidden="true"></span>
+    </button>
+  </aside>
 
   <script type="module" src="main.js"></script>
 </body>
