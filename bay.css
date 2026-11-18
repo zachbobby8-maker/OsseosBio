@@ -1,0 +1,72 @@
+/* OSSEOS BIO // 3D Osteogenesis Bay */
+.bay-section { max-width: var(--max); margin: 0 auto; padding: var(--s7) var(--s5); border-bottom: 1px solid var(--line); }
+.bay-head { margin-bottom: var(--s5); }
+.bay-head h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -.02em; margin: 0 0 var(--s3); font-weight: 600; }
+
+.bay {
+  --bay-cyan: #00f0ff;
+  --bay-violet: #a855f7;
+  --bay-void: #05070c;
+  --bay-panel: #080b12;
+  --bay-card: #0b101b;
+  --bay-border: #1e293b;
+  --bay-steel: #334155;
+  --bay-chassis: #0f172a;
+  --bay-bed: #090d16;
+  --bay-ambient: #1e293b;
+  --bay-text: #e2e8f0;
+  --bay-dim: #64748b;
+  --bay-soft: #94a3b8;
+  display: grid; grid-template-columns: 1fr 300px; grid-template-rows: 660px;
+  width: 100%; background: var(--bay-void); border: 1px solid var(--bay-border);
+  border-radius: 14px; overflow: hidden; font-family: var(--font-mono); color: var(--bay-text);
+}
+.bay-view { position: relative; width: 100%; height: 100%; min-height: 440px; background: radial-gradient(circle at 48% 42%, #101a2a 0%, var(--bay-void) 68%); }
+.bay-mount { position: absolute; inset: 0; cursor: crosshair; background: radial-gradient(ellipse at 50% 56%, rgba(0, 240, 255, .07), transparent 58%); }
+.bay-gl { display: block; width: 100% !important; height: 100% !important; }
+
+.bay-hud { position: absolute; top: 18px; left: 20px; right: 20px; font-size: 12px; color: var(--bay-cyan); pointer-events: none; z-index: 2; }
+.bay-hud p { margin: 0; }
+.bay-proto { color: var(--bay-violet); margin-top: 4px !important; }
+.bay-tip { color: var(--bay-dim); font-size: 10px; margin-top: 4px !important; }
+
+.bay-modes { position: absolute; bottom: 16px; left: 20px; right: 20px; display: flex; flex-wrap: wrap; gap: 8px; z-index: 2; }
+.bay-mode {
+  min-height: 40px; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-family: inherit; font-size: 11px;
+  background: color-mix(in srgb, var(--bay-chassis) 88%, transparent); color: var(--bay-soft);
+  border: 1px solid var(--bay-border); transition: all .2s;
+}
+.bay-mode:hover { color: var(--bay-text); border-color: var(--bay-steel); }
+.bay-mode[aria-pressed="true"] { background: color-mix(in srgb, var(--bay-cyan) 14%, transparent); color: var(--bay-cyan); border-color: var(--bay-cyan); }
+
+.bay-msg { position: absolute; inset: 0; display: grid; place-items: center; padding: var(--s6); text-align: center; color: var(--bay-soft); font-size: 13px; z-index: 1; margin: 0; }
+
+.bay-side { border-left: 1px solid var(--bay-border); background: var(--bay-panel); padding: 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px; }
+.bay-side-title { font-size: 11px; color: var(--bay-cyan); letter-spacing: .08em; margin: 0; }
+.bay-side-sub { font-size: 10px; color: var(--bay-dim); margin: 4px 0 0; }
+.bay-wave-box { margin-top: 14px; background: var(--bay-void); border: 1px solid var(--bay-border); border-radius: 8px; padding: 10px; }
+.bay-wave-label { font-size: 10px; color: var(--bay-soft); margin: 0 0 6px; }
+.bay-wave { width: 100%; height: 95px; display: block; }
+.bay-stats { margin: 14px 0 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
+.bay-stat { background: var(--bay-card); border: 1px solid var(--bay-border); border-radius: 8px; padding: 10px 12px; }
+.bay-stat dt { font-size: 10px; color: var(--bay-dim); }
+.bay-stat dd { margin: 4px 0 0; font-size: 20px; color: var(--bay-cyan); }
+.bay-stat.v dd { color: var(--bay-violet); }
+.bay-stat.s dd { font-size: 11px; color: var(--bay-text); }
+.bay-foot { border-top: 1px solid var(--bay-border); padding-top: 12px; font-size: 10px; color: var(--bay-dim); display: flex; flex-direction: column; gap: 4px; }
+.bay-foot p { margin: 0; }
+.bay-foot .c { color: var(--bay-cyan); }
+.bay-foot .v { color: var(--bay-violet); }
+
+@media (max-width: 860px) {
+  .bay-section { padding: var(--s6) var(--s4); }
+  .bay { grid-template-columns: 1fr; grid-template-rows: 440px auto; }
+  .bay-side { border-left: 0; border-top: 1px solid var(--bay-border); }
+  .bay-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .bay-stat dd { font-size: 16px; }
+  .bay-foot { flex-direction: row; justify-content: space-between; flex-wrap: wrap; }
+}
+@media (max-width: 420px) {
+  .bay-stats { grid-template-columns: 1fr 1fr; }
+  .bay-stat.s { grid-column: 1 / -1; }
+}
