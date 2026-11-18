@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="symbio.css">
   <link rel="stylesheet" href="aether.css">
+  <link rel="stylesheet" href="bay.css">
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
 </head>
 <body>
   <header class="topbar">
@@ -17,6 +26,7 @@
       <span class="brand-name" data-i18n="brand.name">OSSEOS BIO</span>
     </a>
     <nav class="nav" aria-label="Sections">
+      <a href="#or" data-i18n="nav.or">Robot OR</a>
       <a href="#mission" data-i18n="nav.mission">Mission</a>
       <a href="#engines" data-i18n="nav.engines">Engines</a>
       <a href="#offerings" data-i18n="nav.offerings">Offerings</a>
@@ -60,6 +70,7 @@
             <span class="arrow" aria-hidden="true">→</span>
           </button>
           <a class="btn btn-ghost" href="#terminal" data-i18n="cta.terminal">Open gateway terminal</a>
+          <a class="btn btn-ghost" href="#or" data-i18n="cta.watch">Watch the robot operate</a>
         </div>
         <dl class="telemetry">
           <div><dt data-i18n="tele.sys">SYS_ID</dt><dd>OSSEOS-GATEWAY-v3.0 · LKB · SYMBIO-CAD</dd></div>
@@ -67,6 +78,51 @@
           <div><dt data-i18n="tele.manifold">MANIFOLD</dt><dd data-i18n="tele.manifoldValue">S^(d-1) Continuous Field</dd></div>
           <div><dt data-i18n="tele.status">STATUS</dt><dd class="online"><span class="pulse" aria-hidden="true"></span><span data-i18n="tele.online">ONLINE</span></dd></div>
         </dl>
+      </div>
+    </section>
+
+    <section id="or" class="bay-section" aria-labelledby="bayTitle">
+      <div class="bay-head">
+        <p class="eyebrow" data-i18n="bay.eyebrow">Robotic Osteogenesis</p>
+        <h2 id="bayTitle" data-i18n="bay.title">The droid at the table.</h2>
+        <p class="muted" data-i18n="bay.body">A surgical droid prints new bone onto a live skeletal lattice. Pick a protocol, drag to orbit, and move your cursor over the bed to guide the laser.</p>
+      </div>
+      <div class="bay" id="bay">
+        <div class="bay-view">
+          <div class="bay-mount" id="bayMount" role="img" data-i18n-aria-label="bay.canvasLabel" aria-label="3D surgical droid printing bone onto a patient lattice"></div>
+          <p class="bay-msg" id="bayLoading" data-i18n="bay.loading">Booting the osteogenesis bay…</p>
+          <p class="bay-msg" id="bayFallback" hidden></p>
+          <div class="bay-hud">
+            <p data-i18n="bay.hud">OSSEOSBIO // 3D BIOPRINTING &amp; OSTEOGENESIS BAY</p>
+            <p class="bay-proto" id="bayProtocol"></p>
+            <p class="bay-tip" data-i18n="bay.tip">DRAG TO ORBIT • SCROLL TO ZOOM • HOVER BED TO GUIDE LASER</p>
+          </div>
+          <div class="bay-modes" role="group" data-i18n-aria-label="bay.modesLabel" aria-label="Surgical protocol">
+            <button type="button" class="bay-mode" data-bay-mode="cranial" aria-pressed="false">[01] <span data-i18n="bay.mode.cranial">CRANIAL MESH</span></button>
+            <button type="button" class="bay-mode" data-bay-mode="spinal" aria-pressed="true">[02] <span data-i18n="bay.mode.spinal">SPINAL LATTICE</span></button>
+            <button type="button" class="bay-mode" data-bay-mode="orthopedic" aria-pressed="false">[03] <span data-i18n="bay.mode.orthopedic">ORTHOPEDIC GRAFT</span></button>
+          </div>
+        </div>
+        <div class="bay-side">
+          <div>
+            <p class="bay-side-title" data-i18n="bay.telemetry">TELEMETRY // LIVE STREAM</p>
+            <p class="bay-side-sub"><span data-i18n="bay.carrier">CARRIER:</span> <span id="bayFreq">39.42 kHz</span></p>
+            <div class="bay-wave-box">
+              <p class="bay-wave-label" data-i18n="bay.wave">OSTEOGENIC RESONANCE WAVE</p>
+              <canvas class="bay-wave" id="bayWave" aria-hidden="true"></canvas>
+            </div>
+            <dl class="bay-stats">
+              <div class="bay-stat"><dt data-i18n="bay.density">OSTEOBLAST DENSITY</dt><dd id="bayDensity">98.4%</dd></div>
+              <div class="bay-stat v"><dt data-i18n="bay.gain">TENSILE GAIN</dt><dd id="bayGain">+168%</dd></div>
+              <div class="bay-stat s"><dt data-i18n="bay.topology">LATTICE TOPOLOGY</dt><dd data-i18n="bay.locked">PHASE-LOCKED</dd></div>
+            </dl>
+          </div>
+          <div class="bay-foot">
+            <p data-i18n="bay.servo">SERVO: NOMINAL</p>
+            <p><span data-i18n="bay.ink">BIO-INK:</span> <span class="c">94.2%</span></p>
+            <p><span data-i18n="bay.sync">SYNC:</span> <span class="v" data-i18n="bay.active">ACTIVE</span></p>
+          </div>
+        </div>
       </div>
     </section>
 
