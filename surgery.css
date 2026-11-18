@@ -1,0 +1,65 @@
+/* OSSEOS BIO // ROBOTIC OR — self-playing surgery scene */
+.or { position: relative; border-bottom: 1px solid var(--line); }
+.or-sticky {
+  position: relative; height: clamp(560px, 82vh, 760px);
+  display: grid; grid-template-columns: minmax(300px, 420px) minmax(0, 1fr); grid-template-rows: minmax(0, 1fr);
+  align-items: center; gap: 0; padding: 56px var(--s5) var(--s5); overflow: hidden;
+  background: radial-gradient(circle at 65% 45%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 60%), var(--bg);
+}
+.or-canvas { grid-column: 2; grid-row: 1; width: 100%; height: 100%; min-height: 320px; display: block; }
+.or-hud { position: absolute; top: var(--s4); left: var(--s5); right: var(--s5); display: flex; justify-content: space-between; gap: var(--s3); flex-wrap: wrap;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em; color: var(--muted); pointer-events: none; }
+.or-hud b { color: var(--primary); font-weight: 500; }
+.or-rec { display: inline-flex; align-items: center; gap: var(--s2); }
+.or-rec::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 1.2s infinite; }
+
+.or-card {
+  grid-column: 1; grid-row: 1; position: relative; z-index: 2; align-self: center;
+  padding: var(--s5); border: 1px solid var(--line); border-radius: var(--r-lg);
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+}
+.or-eyebrow { margin: 0 0 var(--s2); font-family: var(--font-mono); font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); }
+.or-title { margin: 0 0 var(--s3); font-size: clamp(28px, 3.6vw, 46px); line-height: 1.05; letter-spacing: -.03em; font-weight: 600; min-height: 1.05em; }
+.or-ch { display: inline-block; opacity: 0; transform: translateY(.5em) rotate(6deg); transition: opacity .35s, transform .45s cubic-bezier(.2,.9,.3,1.3); transition-delay: calc(var(--i) * 22ms); }
+.or-title.in .or-ch { opacity: 1; transform: none; }
+.or-body { margin: 0; color: var(--muted); font-size: 16px; max-width: 42ch; }
+.or-read { margin: var(--s3) 0 0; font-family: var(--font-mono); font-size: 12px; color: var(--primary); }
+.or-body, .or-read { opacity: 0; transform: translateY(6px); }
+.or-body.in, .or-read.in { opacity: 1; transform: none; transition: opacity .5s .25s, transform .5s .25s; }
+.or-actions { display: flex; align-items: center; gap: var(--s3); margin-top: var(--s4); flex-wrap: wrap; }
+.or-bpm { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.or-bpm span { color: var(--text); font-size: 15px; }
+
+.or-index { position: absolute; right: var(--s5); bottom: var(--s5); z-index: 2; list-style: none; margin: 0; padding: var(--s1);
+  display: flex; flex-direction: row; gap: var(--s1); border: 1px solid var(--line); border-radius: 999px;
+  background: color-mix(in srgb, var(--surface) 85%, transparent); }
+.or-index button {
+  display: flex; align-items: center; gap: var(--s2); min-height: 40px; padding: 0 var(--s3);
+  background: transparent; border: 0; border-radius: 999px; cursor: pointer;
+  font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: .06em;
+}
+.or-index button:hover { color: var(--text); background: color-mix(in srgb, var(--bg) 60%, transparent); }
+.or-index .n { width: 26px; height: 26px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-size: 11px; transition: all .25s; }
+.or-index .is-done .n { border-color: var(--primary); color: var(--primary); }
+.or-index .is-active { color: var(--text); }
+.or-index .is-active .n { background: var(--primary); border-color: var(--primary); color: var(--primary-ink); }
+.or-progress { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--line); }
+.or-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); transform-origin: left; transform: scaleX(0); }
+.or-hint { display: none; }
+
+@media (max-width: 1080px) {
+  .or-index .lbl { display: none; }
+  .or-index button { padding: 0 6px; }
+}
+@media (max-width: 820px) {
+  .or-sticky { display: flex; flex-direction: column; align-items: stretch; height: auto; padding: 44px 0 var(--s4); }
+  .or-canvas { order: 1; height: 340px; min-height: 0; }
+  .or-index { order: 2; position: static; align-self: center; margin: var(--s2) 0 var(--s3); }
+  .or-index button { min-height: 44px; }
+  .or-card { order: 3; margin: 0 var(--s3); padding: var(--s4); }
+  .or-body { font-size: 14px; }
+  .or-hud { left: var(--s4); right: var(--s4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .or-ch, .or-body.in, .or-read.in { transition: none; }
+}
