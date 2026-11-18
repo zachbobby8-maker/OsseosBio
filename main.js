@@ -2,6 +2,7 @@ import { computeLkb, encodeLkbToken, shortLkb, fmtVec } from './lkb.js';
 import { initShader } from './shader.js';
 import { initSymbio, symbioCommand, SYMBIO_HELP } from './symbio.js';
 import { initAether, aetherCommand } from './aether.js';
+import { initBay } from './bay.js';
 
 (() => {
   // Built-in wording backup: if the translation service hasn't loaded (or never does),
@@ -544,6 +545,9 @@ import { initAether, aetherCommand } from './aether.js';
   });
 
   async function boot() {
+    // Start the 3D bay before translation/storage work so the viewport never
+    // waits behind the rest of the landing page boot sequence.
+    try { initBay({ t }); } catch (e) { console.warn('[OSSEOS] 3D bay unavailable', e); }
     // Load the backup wording first, then wait briefly for translations
     await loadFallback();
     let tries = 0;
