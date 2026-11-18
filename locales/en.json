@@ -1,6 +1,31 @@
 {
   "brand": { "name": "OSSEOS BIO" },
-  "nav": { "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "symbio": "Symbio-CAD", "sectors": "Sectors", "channels": "Channels" },
+  "nav": { "or": "3D Bay", "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "symbio": "Symbio-CAD", "sectors": "Sectors", "channels": "Channels" },
+  "bay": {
+    "eyebrow": "Robotic Osteogenesis",
+    "title": "The droid at the table.",
+    "body": "A surgical droid prints new bone onto a live skeletal lattice. Pick a protocol, drag to orbit, and move your cursor over the bed to guide the laser.",
+    "canvasLabel": "3D surgical droid printing bone onto a patient lattice",
+    "loading": "Booting the osteogenesis bay…",
+    "noThree": "The 3D engine didn't load. Check your connection and refresh the page.",
+    "noWebgl": "This browser can't show 3D graphics, so the bay is offline here.",
+    "hud": "OSSEOSBIO // 3D BIOPRINTING & OSTEOGENESIS BAY",
+    "protocol": "PROTOCOL: {title} | RES: {res}",
+    "tip": "DRAG TO ORBIT • SCROLL TO ZOOM • HOVER BED TO GUIDE LASER",
+    "modesLabel": "Surgical protocol",
+    "mode": { "cranial": "CRANIAL MESH", "spinal": "SPINAL LATTICE", "orthopedic": "ORTHOPEDIC GRAFT" },
+    "telemetry": "TELEMETRY // LIVE STREAM",
+    "carrier": "CARRIER:",
+    "wave": "OSTEOGENIC RESONANCE WAVE",
+    "density": "OSTEOBLAST DENSITY",
+    "gain": "TENSILE GAIN",
+    "topology": "LATTICE TOPOLOGY",
+    "locked": "PHASE-LOCKED",
+    "servo": "SERVO: NOMINAL",
+    "ink": "BIO-INK:",
+    "sync": "SYNC:",
+    "active": "ACTIVE"
+  },
   "sync": { "label": "39.42k Bio-Sync: ACTIVE" },
   "symbio": {
     "eyebrow": "Symbio-CAD Tuner",
@@ -80,7 +105,8 @@
     "enterShort": "Enter Mesh",
     "enter": "Enter Braid Mesh Engine",
     "handshake": "Initialize handshake · Enter Braid Mesh Engine",
-    "terminal": "Open gateway terminal"
+    "terminal": "Open gateway terminal",
+    "watch": "Watch the robot operate"
   },
   "ness": {
     "freq": "Carrier frequency",
