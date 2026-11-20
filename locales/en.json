@@ -1,6 +1,10 @@
 {
   "brand": { "name": "OSSEOS BIO" },
-  "nav": { "or": "3D Bay", "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "symbio": "Symbio-CAD", "sectors": "Sectors", "channels": "Channels" },
+  "nav": { "or": "3D Bay", "biolock": "Bio-Lock", "mission": "Mission", "engines": "Engines", "offerings": "Offerings", "terminal": "Terminal", "leaf": "Leaf Monitor", "symbio": "Symbio-CAD", "sectors": "Sectors", "channels": "Channels" },
+  "biolock": {
+    "title": "OSSEOSBIO // TOPOLOGICAL BIO-LOCK v5.2",
+    "kicker": "OSSEOSBIO ARCHITECTURAL MANIFESTO // GENOMIC MECHANOBIOLOGY"
+  },
   "bay": {
     "eyebrow": "Robotic Osteogenesis",
     "title": "The droid at the table.",
