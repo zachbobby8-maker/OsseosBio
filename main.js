@@ -3,6 +3,7 @@ import { initShader } from './shader.js';
 import { initSymbio, symbioCommand, SYMBIO_HELP } from './symbio.js';
 import { initAether, aetherCommand } from './aether.js';
 import { initBay } from './bay.js';
+import { initBioLock } from './biolock.js';
 
 (() => {
   // Built-in wording backup: if the translation service hasn't loaded (or never does),
@@ -548,6 +549,7 @@ import { initBay } from './bay.js';
     // Start the 3D bay before translation/storage work so the viewport never
     // waits behind the rest of the landing page boot sequence.
     try { initBay({ t }); } catch (e) { console.warn('[OSSEOS] 3D bay unavailable', e); }
+    try { initBioLock(); } catch (e) { console.warn('[OSSEOS] Bio-Lock unavailable', e); }
     // Load the backup wording first, then wait briefly for translations
     await loadFallback();
     let tries = 0;
