@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="symbio.css">
   <link rel="stylesheet" href="aether.css">
   <link rel="stylesheet" href="bay.css">
+  <link rel="stylesheet" href="biolock.css">
   <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/shaders/CopyShader.js"></script>
@@ -27,6 +28,7 @@
     </a>
     <nav class="nav" aria-label="Sections">
       <a href="#or" data-i18n="nav.or">Robot OR</a>
+      <a href="#biolock" data-i18n="nav.biolock">Bio-Lock</a>
       <a href="#mission" data-i18n="nav.mission">Mission</a>
       <a href="#engines" data-i18n="nav.engines">Engines</a>
       <a href="#offerings" data-i18n="nav.offerings">Offerings</a>
@@ -121,6 +123,177 @@
             <p data-i18n="bay.servo">SERVO: NOMINAL</p>
             <p><span data-i18n="bay.ink">BIO-INK:</span> <span class="c">94.2%</span></p>
             <p><span data-i18n="bay.sync">SYNC:</span> <span class="v" data-i18n="bay.active">ACTIVE</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="biolock" class="section" aria-labelledby="blHeading">
+      <p class="section-index">00</p>
+      <div class="section-body">
+        <div class="biolock-wrap">
+          <div class="bl-strip">
+            <div class="bl-brand-row">
+              <span class="pulse" aria-hidden="true"></span>
+              <span class="bl-title" id="blHeading" data-i18n="biolock.title">OSSEOSBIO // TOPOLOGICAL BIO-LOCK v5.2</span>
+              <div class="bl-scope-box">
+                <canvas id="blMicroScope" class="bl-scope-canvas" width="120" height="24" aria-hidden="true"></canvas>
+                <span class="bl-scope-hz">39.42kHz</span>
+              </div>
+            </div>
+            <div class="bl-pills">
+              <span class="bl-pill">CARRIER: 39,420 Hz [LOCKED]</span>
+              <span id="blPillCoherence" class="bl-pill">COHERENCE FLOOR: 84.2%</span>
+              <span id="blPillThermal" class="bl-pill is-accent">THERMAL LEAK: 0.00 W</span>
+              <span id="blPillBetti" class="bl-pill">BETTI-1 VOIDS (H¹): 0</span>
+            </div>
+          </div>
+
+          <div id="blBanner" class="bl-banner">
+            <div class="bl-banner-top">
+              <p class="bl-kicker" data-i18n="biolock.kicker">OSSEOSBIO ARCHITECTURAL MANIFESTO // GENOMIC MECHANOBIOLOGY</p>
+              <span id="blStrainAlert" class="bl-strain-alert" hidden>PIEZO STRAIN &gt; 0.70c // HAVERSIAN RING EXCITATION ACTIVE</span>
+            </div>
+            <h3>DNA is not a quaternary string. It is a <span class="bl-hl">constrained topological computer</span>.</h3>
+            <p>
+              Legacy 4IR models read <code>A-T-C-G</code> as flat text, whereas living osteocytes compute through conserved helical topology (<span class="bl-mono-hi">Lk = Tw + Wr</span>) and Legendrian contact geometry (<span class="bl-mono-ac">α = dz − y·dx = 0</span>), routing piezoelectric lattice strain across the nuclear LINC bridge into deterministic chromatin states.
+            </p>
+          </div>
+
+          <div class="bl-grid">
+            <div class="bl-card">
+              <div>
+                <div class="bl-card-head">
+                  <div>
+                    <h4 class="bl-card-title">01 // Legendrian Chromatin Manifold (Lk = Tw + Wr)</h4>
+                    <p class="bl-card-sub">SCRUB CURSOR HORIZONTALLY ACROSS VIEWPORT TO MORPH Tw ↔ Wr IN REAL TIME</p>
+                  </div>
+                  <div class="bl-btn-row">
+                    <button id="blMode5IR" type="button" class="bl-btn active">5IR TOPOLOGICAL</button>
+                    <button id="blMode4IR" type="button" class="bl-btn">4IR STRING</button>
+                  </div>
+                </div>
+                <div id="blDnaWrap" class="bl-viewport">
+                  <canvas id="blDnaCanvas" class="bl-dna-canvas"></canvas>
+                  <div class="bl-hud-tr">
+                    <div class="bl-hud-chip">Lk = <span id="blHudLk">13.00</span> (Tw <span id="blHudTw">9.50</span> + Wr <span id="blHudWr">3.50</span>)</div>
+                    <div class="bl-hud-chip is-accent">tb(L) = <span id="blHudTb">+1.50</span> // α = dz − y·dx = 0</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bl-lock-bar">
+                <div class="bl-brand-row">
+                  <button id="blConservationLock" type="button" class="bl-btn active">
+                    <span id="blLockDot" class="bl-dot"></span>
+                    <span>CONSERVATION LOCK (Lk = 13.0)</span>
+                  </button>
+                  <span class="bl-lock-hint">TRADES Tw ↔ Wr TO PRESERVE LINKING INVARIANT</span>
+                </div>
+                <span class="bl-inv-badge">INVARIANT: <span id="blInvariantBadge">LOCKED [13.00]</span></span>
+              </div>
+
+              <div class="bl-sliders">
+                <div class="bl-slider-box">
+                  <div class="bl-slider-head">
+                    <label for="blSliderWr">SUPERCOIL WRITHE (Wr)</label>
+                    <strong id="blReadoutWr" class="is-accent">3.50</strong>
+                  </div>
+                  <input id="blSliderWr" type="range" class="bl-range" min="0" max="7" step="0.05" value="3.5">
+                  <div class="bl-slider-scale"><span>0.00 (RELAXED)</span><span>7.00 (PLECTONEME)</span></div>
+                </div>
+                <div class="bl-slider-box">
+                  <div class="bl-slider-head">
+                    <label for="blSliderTw">HELICAL TWIST (Tw)</label>
+                    <strong id="blReadoutTw">9.50</strong>
+                  </div>
+                  <input id="blSliderTw" type="range" class="bl-range" min="2" max="13" step="0.05" value="9.5">
+                  <div class="bl-slider-scale"><span>2.00</span><span>13.00</span></div>
+                </div>
+                <div class="bl-slider-box">
+                  <div class="bl-slider-head">
+                    <label for="blSliderStrain">PIEZO STRAIN LOAD</label>
+                    <strong id="blReadoutStrain">0.42c</strong>
+                  </div>
+                  <input id="blSliderStrain" type="range" class="bl-range" min="0.10" max="1.00" step="0.01" value="0.42">
+                  <div class="bl-slider-scale"><span>0.10c</span><span>0.70c</span><span>1.00c</span></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bl-card">
+              <div>
+                <div class="bl-card-head">
+                  <div>
+                    <h4 class="bl-card-title">02 // 3D Osseous Scaffold &amp; LINC Bridge</h4>
+                    <p class="bl-card-sub">DRAG TO ORBIT • SCROLL / PINCH TO ZOOM</p>
+                  </div>
+                  <div class="bl-btn-row">
+                    <button id="blAutoOrbit" type="button" class="bl-btn active">ORBIT: AUTO</button>
+                    <button id="blResetCam" type="button" class="bl-btn">RESET</button>
+                  </div>
+                </div>
+                <div id="blThreeContainer" class="bl-viewport bl-three-wrap">
+                  <div class="bl-legend-bl">
+                    <span class="bl-leg-item"><span class="bl-swatch"></span>Ti-hBN OSTEON LATTICE</span>
+                    <span class="bl-leg-item is-accent"><span class="bl-swatch is-accent"></span>LINC FILAMENTS</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bl-tel-rows">
+                <div class="bl-tel-row"><span>Primary Bioreactor Matrix</span><span>3D Graphene-Collagen + Ti/hBN</span></div>
+                <div class="bl-tel-row is-accent"><span>Hydrodynamic Perfusion</span><span>39,420 Hz Standing Wave</span></div>
+                <div class="bl-tel-row"><span>Nuclear Envelope Bridge</span><span id="blLincStatus">LINC Tensegrity [PHASE-COHERENT]</span></div>
+                <div class="bl-tel-row is-accent"><span>Thurston–Bennequin tb(L)</span><span id="blTelemetryTb">+1.50 [INVARIANT]</span></div>
+                <div class="bl-tel-row"><span>Organoid SASP Crosstalk</span><span id="blSaspStatus">Liver–Bone Microfluidic [NOMINAL]</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bl-drawer">
+            <button id="blToggleDrawer" type="button" class="bl-drawer-btn">
+              <span class="bl-card-title">BRAID CUDA-Q SPATIAL TRANSCRIPTOMICS HEATMAP // 96-CELL OSTEON MATRIX (16×6)</span>
+              <span class="bl-brand-row">
+                <span id="blHeatmapSummary" class="bl-inv-badge">COHERENT OSTEOCYTES: 94.8%</span>
+                <span id="blDrawerChevron" class="bl-pill">HIDE ▲</span>
+              </span>
+            </button>
+            <div id="blDrawerBody" class="bl-drawer-body">
+              <div class="bl-heat-top">
+                <div class="bl-heat-legend">
+                  <span><i class="bl-swatch"></i>PHASE-LOCKED OSTEOCYTE</span>
+                  <span><i class="bl-swatch" style="opacity:.6"></i>ACTIVE OSTEOBLAST</span>
+                  <span><i class="bl-swatch is-accent"></i>TORSIONAL STRESS / SASP</span>
+                  <span><i class="bl-swatch" style="background:var(--line)"></i>SENESCENT (H¹ VOID)</span>
+                </div>
+                <div id="blCellInspector" class="bl-inspector">HOVER OR TAP ANY CELL NODE TO INSPECT CHROMATIN STATE</div>
+              </div>
+              <div id="blHeatmapGrid" class="bl-heatmap"></div>
+            </div>
+          </div>
+
+          <div class="bl-arrays">
+            <article class="bl-array">
+              <p class="bl-array-tag">ARRAY 01 // SPATIAL TRACKING</p>
+              <h4>01 // Laser Scan Confocal</h4>
+              <p>Tracks fluorescent osteoblast-to-osteocyte embedding transitions and dendritic canaliculi network formation inside the 3D scaffold.</p>
+            </article>
+            <article class="bl-array">
+              <p class="bl-array-tag is-pri">ARRAY 02 // MATRIX PROTEOMICS</p>
+              <h4>02 // MALDI-TOF Spectrometry</h4>
+              <p>CHCA-matrix laser desorption fingerprinting enzymatic collagen cross-link integrity and mineral nucleation in real time.</p>
+            </article>
+            <article class="bl-array">
+              <p class="bl-array-tag">ARRAY 03 // TOPOLOGICAL AI</p>
+              <h4>03 // Braid CUDA-Q Radiomics</h4>
+              <p>Maps chromatin folding invariants (<span class="bl-mono-hi">Lk = Tw + Wr</span>) and spatial transcriptomics across mechanical stress vectors.</p>
+            </article>
+            <article class="bl-array">
+              <p class="bl-array-tag is-pri">ARRAY 04 // APOPTOSIS AUDIT</p>
+              <h4>04 // TUNEL Fluorometric Array</h4>
+              <p>Monitors double-strand micro-damage thresholds and confirms zero senescence drift at the <span class="bl-mono-hi">84.2%</span> coherence lock.</p>
+            </article>
           </div>
         </div>
       </div>
